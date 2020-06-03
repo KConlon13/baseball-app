@@ -7,10 +7,12 @@ class TeamCard extends React.Component {
 
 
   render(){
-      console.log(this.props.obj)
+    console.log(this.props.obj)
+    let webAddress = (`http://www.${this.props.obj.website_url}`)
+
     return (
       <div className="TeamCard">
-          <a href={this.props.obj.website_url} target="_blank">
+          <a href={webAddress} target="_blank" rel="noopener noreferrer">
           <Card>
              <Card.Content>
                 <Card.Header>{this.props.obj.name_display_full}</Card.Header>
