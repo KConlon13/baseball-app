@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Card } from 'semantic-ui-react'
+import { Card, Icon } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
 
@@ -25,6 +25,10 @@ class TeamCard extends React.Component {
                 <Card.Description>
                 {this.props.obj.address_city} {this.props.obj.address_state}
                 </Card.Description>
+             </Card.Content>
+             <Card.Content extra>
+                <Icon name='home' />
+                 {this.props.obj.venue_name}
              </Card.Content>
           </Card>
           </a>
