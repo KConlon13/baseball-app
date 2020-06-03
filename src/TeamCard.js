@@ -10,6 +10,7 @@ class TeamCard extends React.Component {
       console.log(this.props.obj)
     return (
       <div className="TeamCard">
+          <a href={this.props.obj.website_url} target="_blank">
           <Card>
              <Card.Content>
                 <Card.Header>{this.props.obj.name_display_full}</Card.Header>
@@ -17,10 +18,14 @@ class TeamCard extends React.Component {
                     <span className='date'>Founded in {this.props.obj.first_year_of_play}</span>
                 </Card.Meta>
                 <Card.Description>
-                    {this.props.obj.address_line1}, {this.props.obj.address_city} {this.props.obj.address_state}
+                    {this.props.obj.address_line1}
+                </Card.Description>
+                <Card.Description>
+                {this.props.obj.address_city} {this.props.obj.address_state}
                 </Card.Description>
              </Card.Content>
           </Card>
+          </a>
       </div>
     );
   }
