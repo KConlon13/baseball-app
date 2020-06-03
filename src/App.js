@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import TeamContainer from './TeamContainer'
 
 class App extends React.Component {
   state={
@@ -8,16 +8,16 @@ class App extends React.Component {
   }
   
   componentDidMount(){
-    fetch("http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='cespedes%25'")
+    fetch("http://lookup-service-prod.mlb.com/json/named.team_all_season.bam?sport_code='mlb'&all_star_sw='N'&sort_order=name_asc&season='2017'")
     .then(response=>response.json())
-    .then(data => this.setState({mainContainer: data.search_player_all.queryResults.row}, console.log(data.search_player_all.queryResults.row))) 
+    .then(data => this.setState({mainContainer: data.team_all_season.queryResults.row}, console.log(data.team_all_season.queryResults.row))) 
   }
-  // Testing here to see how the API endpoints work and how I will be able to fetch individual players
+
+  // Testing Here to Create Baseball Team Cards
   render(){
     return (
       <div className="App">
-        <h1>{this.state.mainContainer.name_display_first_last}</h1>
-        <h3>{this.state.mainContainer.position} - {this.state.mainContainer.team_full}</h3>
+        <TeamContainer teamsArray={this.state.mainContainer}/>
       </div>
     );
   }
