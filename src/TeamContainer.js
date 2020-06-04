@@ -32,9 +32,17 @@ class TeamContainer extends React.Component {
         })
     }
     
-    
     render(){
-
+        let nationalArr = [];
+        let americanArr = [];
+        this.props.teamsArray.map(rest => {
+            if (rest.league === "NL"){
+                return nationalArr.push(rest)
+            } else {
+                return americanArr.push(rest)
+            }
+        });
+        
         let allTeamsComponent = this.props.teamsArray.map(rest => {
             return (
             <Grid.Column>
@@ -43,21 +51,21 @@ class TeamContainer extends React.Component {
             )
         });
 
-        let nationalTeamsComponent = this.props.teamsArray.map(rest => {
+        let nationalTeamsComponent = nationalArr !== [] ? nationalArr.map(rest => {
             return (
             <Grid.Column>
                 <TeamCard obj={rest}/>
             </Grid.Column>
             )
-        });
+        }) : null;
 
-        let americanTeamsComponent = this.props.teamsArray.map(rest => {
+        let americanTeamsComponent = americanArr !== [] ? americanArr.map(rest => {
             return (
             <Grid.Column>
                 <TeamCard obj={rest}/>
             </Grid.Column>
             )
-        });
+        }) : null;
 
 
 
