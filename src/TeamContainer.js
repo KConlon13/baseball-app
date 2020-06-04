@@ -32,15 +32,35 @@ class TeamContainer extends React.Component {
         })
     }
     
+    
     render(){
-        let teamsComponent = this.props.teamsArray.map(rest => {
+
+        let allTeamsComponent = this.props.teamsArray.map(rest => {
             return (
             <Grid.Column>
                 <TeamCard obj={rest}/>
             </Grid.Column>
             )
-        })
-        
+        });
+
+        let nationalTeamsComponent = this.props.teamsArray.map(rest => {
+            return (
+            <Grid.Column>
+                <TeamCard obj={rest}/>
+            </Grid.Column>
+            )
+        });
+
+        let americanTeamsComponent = this.props.teamsArray.map(rest => {
+            return (
+            <Grid.Column>
+                <TeamCard obj={rest}/>
+            </Grid.Column>
+            )
+        });
+
+
+
         return (
             <div className="TeamContainer">
                 <Button.Group className="button-group">
@@ -53,7 +73,7 @@ class TeamContainer extends React.Component {
 
                 <Grid columns={3} divide>
                     <Grid.Row>
-                        {teamsComponent}
+                        {this.state.buttonAL ? americanTeamsComponent : this.state.buttonNL ? nationalTeamsComponent : allTeamsComponent}
                     </Grid.Row>
                 </Grid>
             </div>
