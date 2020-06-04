@@ -4,16 +4,17 @@ import { Card, Icon } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
 
-
-
   render(){
     console.log(this.props.obj)
     let webAddress = (`http://www.${this.props.obj.website_url}`)
 
+    let colorTypeLeague;
+    this.props.obj.league === "AL" ? colorTypeLeague = "red" : colorTypeLeague = "blue";
+
     return (
       <div className="TeamCard">
           <a href={webAddress} target="_blank" rel="noopener noreferrer">
-          <Card>
+          <Card color={colorTypeLeague}>
              <Card.Content>
                 <Card.Header>{this.props.obj.name_display_full}</Card.Header>
                 <Card.Meta>
@@ -30,7 +31,7 @@ class TeamCard extends React.Component {
                 <Icon name='home' />
                  {this.props.obj.venue_name}
              </Card.Content>
-          </Card>
+          </Card> 
           </a>
       </div>
     );
