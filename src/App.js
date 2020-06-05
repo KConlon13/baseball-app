@@ -5,6 +5,8 @@ import TeamContainer from './TeamContainer'
 class App extends React.Component {
   state={
     mainContainer: [],
+    modalClicked: false,
+    modalContainer: [],
   }
   
   // Inital Data Fetch for Teams
@@ -16,10 +18,14 @@ class App extends React.Component {
 
   // Secondary Data Fetch/ClickHandler for Roster's of Clicked Team
   teamIdClickHandler = (response_obj) => {
+    this.setState({
+      modalClicked: true,
+    })
+
     let team_id = response_obj.team_id;
     fetch(`http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=${team_id}`)
     .then(response=>response.json())
-    .then(data => console.log(data, "hello you did it good job")) 
+    .then(data => data !== [] ? (this.setState({modalContainer: data}), console.log(this.state.modalContainer)) : null) 
   }
   
   // Would like to create a modal to pop up and display all of the clicked team's 40 man roster

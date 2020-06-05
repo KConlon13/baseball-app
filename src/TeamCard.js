@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Icon, Modal } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
 
