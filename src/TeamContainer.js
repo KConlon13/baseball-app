@@ -35,34 +35,34 @@ class TeamContainer extends React.Component {
     render(){
         let nationalArr = [];
         let americanArr = [];
-        this.props.teamsArray.map(rest => {
-            if (rest.league === "NL"){
-                return nationalArr.push(rest)
+        this.props.teamsArray.map(team => {
+            if (team.league === "NL"){
+                return nationalArr.push(team)
             } else {
-                return americanArr.push(rest)
+                return americanArr.push(team)
             }
         });
         
-        let allTeamsComponent = this.props.teamsArray.map(rest => {
+        let allTeamsComponent = this.props.teamsArray.map(team => {
             return (
-            <Grid.Column>
-                <TeamCard obj={rest}/>
+            <Grid.Column key={team.team_id}>
+                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler}/>
             </Grid.Column>
             )
         });
 
-        let nationalTeamsComponent = nationalArr !== [] ? nationalArr.map(rest => {
+        let nationalTeamsComponent = nationalArr !== [] ? nationalArr.map(team => {
             return (
-            <Grid.Column>
-                <TeamCard obj={rest}/>
+            <Grid.Column key={team.team_id}>
+                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler}/>
             </Grid.Column>
             )
         }) : null;
 
-        let americanTeamsComponent = americanArr !== [] ? americanArr.map(rest => {
+        let americanTeamsComponent = americanArr !== [] ? americanArr.map(team => {
             return (
-            <Grid.Column>
-                <TeamCard obj={rest}/>
+            <Grid.Column key={team.team_id}>
+                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler}/>
             </Grid.Column>
             )
         }) : null;
