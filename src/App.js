@@ -14,23 +14,17 @@ class App extends React.Component {
     .then(data => this.setState({mainContainer: data.team_all_season.queryResults.row} )) 
   }
 
-  // Secondary Data Fetch for Roster's of Clicked Team
-  componentWillMount(){
-    let team_id = 121;
+  // Secondary Data Fetch/ClickHandler for Roster's of Clicked Team
+  teamIdClickHandler = (response_obj) => {
+    let team_id = response_obj.team_id;
     fetch(`http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=${team_id}`)
     .then(response=>response.json())
     .then(data => console.log(data, "hello you did it good job")) 
-  }
-
-  teamIdClickHandler = (response_obj) => {
-    // let team_id = response_obj.team_id;
-    console.log("THIS IS THE TEAM ID HANDLER WORKING", response_obj.team_id)
   }
   
   // Would like to create a modal to pop up and display all of the clicked team's 40 man roster
   // Modal design provided by Semantic UI React
   
-  // Create Baseball Team Cards
   render(){
     return (
       <div className="App">
