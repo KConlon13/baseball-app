@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TeamCard from "./TeamCard"
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid, Button, Modal } from 'semantic-ui-react'
 
 class TeamContainer extends React.Component {
     state={
@@ -46,7 +46,7 @@ class TeamContainer extends React.Component {
         let allTeamsComponent = this.props.teamsArray.map(team => {
             return (
             <Grid.Column key={team.team_id}>
-                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler}/>
+                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler} rosterArray={this.props.rosterArray}/>
             </Grid.Column>
             )
         });
@@ -54,7 +54,7 @@ class TeamContainer extends React.Component {
         let nationalTeamsComponent = nationalArr !== [] ? nationalArr.map(team => {
             return (
             <Grid.Column key={team.team_id}>
-                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler}/>
+                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler} rosterArray={this.props.rosterArray}/>
             </Grid.Column>
             )
         }) : null;
@@ -62,15 +62,15 @@ class TeamContainer extends React.Component {
         let americanTeamsComponent = americanArr !== [] ? americanArr.map(team => {
             return (
             <Grid.Column key={team.team_id}>
-                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler}/>
+                <TeamCard obj={team} key={team.team_id} teamIdClickHandler={this.props.teamIdClickHandler} rosterArray={this.props.rosterArray}/>
             </Grid.Column>
             )
         }) : null;
 
-
-
+        
         return (
             <div className="TeamContainer">
+            {/* {this.props.rosterArray !== [] ? console.log(this.props.rosterArray):null} */}
                 <Button.Group className="button-group">
                     <Button onClick={()=>this.allTeamsClickHandler()}>MLB</Button>
                         <Button.Or />

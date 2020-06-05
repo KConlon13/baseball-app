@@ -9,7 +9,7 @@ class RosterModal extends React.Component {
 
     return (
       <div className="RosterModal">
-        <Modal trigger={<Button>Long Modal</Button>}>
+        <Modal trigger={<Button></Button>}>
             <Modal.Header>Profile Picture</Modal.Header>
             <Modal.Content image>
             <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />

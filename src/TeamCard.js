@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import { Card, Icon, Modal } from 'semantic-ui-react'
+import RosterModal from "./RosterModal";
+import { Card, Icon, Modal, Button, Image, Header } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
 
-  render(){
-    // console.log(this.props.obj)
+
+    render(){
+        // console.log(this.props.obj)
     let webAddress = (`http://www.${this.props.obj.website_url}`)
 
     let colorTypeLeague;
@@ -24,11 +26,42 @@ class TeamCard extends React.Component {
                 </Card.Description>
                 <Card.Description>
                 {this.props.obj.address_city} {this.props.obj.address_state}
+                <Card.Description>
+                <Icon name='home' />
+                 {this.props.obj.venue_name}
+                 </Card.Description>
                 </Card.Description>
              </Card.Content>
              <Card.Content extra onClick={()=>this.props.teamIdClickHandler(this.props.obj)}>
-                <Icon name='home' />
-                 {this.props.obj.venue_name}
+                {/* {this.props.rosterArray !== [] ? console.log(this.props.rosterArray.queryResults.row) : null} */}
+                <Button>View Roster</Button>
+                 {/* <Modal trigger={<Button>View Roster</Button>}> */}
+                    {/* <Modal.Header>{this.props.obj.name_display_full}</Modal.Header>
+                    <Modal.Content image>
+                    <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                    <Modal.Description>
+                        <Header>40 Man Roster</Header>
+                        <p>
+                        This is an example of expanded content that will cause the modal's
+                        dimmer to scroll
+                        </p>
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                    </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions>
+                    <Button primary>
+                        Proceed <Icon name='right chevron' />
+                    </Button>
+                    </Modal.Actions> */}
+                 {/* </Modal> */}
+
              </Card.Content>
           </Card> 
       </div>
