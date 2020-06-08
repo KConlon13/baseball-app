@@ -34,33 +34,9 @@ class TeamCard extends React.Component {
              </Card.Content>
              <Card.Content extra onClick={()=>this.props.teamIdClickHandler(this.props.obj)}>
                 {/* {this.props.rosterArray !== [] ? console.log(this.props.rosterArray.queryResults.row) : null} */}
-                <Button>View Roster</Button>
-                 {/* <Modal trigger={<Button>View Roster</Button>}> */}
-                    {/* <Modal.Header>{this.props.obj.name_display_full}</Modal.Header>
-                    <Modal.Content image>
-                    <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-                    <Modal.Description>
-                        <Header>40 Man Roster</Header>
-                        <p>
-                        This is an example of expanded content that will cause the modal's
-                        dimmer to scroll
-                        </p>
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                    </Modal.Description>
-                    </Modal.Content>
-                    <Modal.Actions>
-                    <Button primary>
-                        Proceed <Icon name='right chevron' />
-                    </Button>
-                    </Modal.Actions> */}
-                 {/* </Modal> */}
+                 <Modal trigger={<Button>View Roster</Button>}>
+                     <RosterModal rosterArray={this.props.rosterArray}/>
+                 </Modal>
 
              </Card.Content>
           </Card> 

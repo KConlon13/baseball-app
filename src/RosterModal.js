@@ -6,11 +6,12 @@ class RosterModal extends React.Component {
 
 
   render(){
-
+     if (this.props.rosterArray) {
+      //  console.log(this.props.rosterArray.roster_40.queryResults.row)
+    } 
     return (
       <div className="RosterModal">
-        <Modal trigger={<Button></Button>}>
-            <Modal.Header>Profile Picture</Modal.Header>
+            <Modal.Header>Team Name Here</Modal.Header>
             <Modal.Content image>
             <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
             <Modal.Description>
@@ -34,7 +35,6 @@ class RosterModal extends React.Component {
                 Proceed <Icon name='right chevron' />
             </Button>
             </Modal.Actions>
-        </Modal>
       </div>
     );
   }
