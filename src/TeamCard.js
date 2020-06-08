@@ -4,7 +4,6 @@ import './App.css';
 import { Card, Icon, Modal, Button, Image } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
-    // test 1
     state={
         modalContainer: [], 
         modalClicked: false
@@ -27,19 +26,25 @@ class TeamCard extends React.Component {
         let playerArray;
         if (this.state.modalContainer !== []) {
             playerArray = this.state.modalContainer.map(p => {
-                // console.log(p)
-            return <div>
-            <Modal.Header>{p.name_full}</Modal.Header>
-            <Modal.Content image>
-            <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-            <Modal.Description>
-            <p>Position: {p.position_txt}</p>
-            </Modal.Description>
-            <br></br>
+                console.log(p)
+            return (<Modal.Content>
+                <h2>{p.name_full}</h2>
+                <Modal.Content image>
+                <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                <Modal.Description>
+                    <ul>
+                        <li>Position: {p.position_txt}</li>
+                        <li>Bats: {p.bats}</li>
+                        <li>Height: {p.height_feet}'{p.height_inches}"</li>
+                        <li>Weight: {p.weight}</li>
+                    </ul>
+                </Modal.Description>
+                <br></br>
+                </Modal.Content>
             </Modal.Content>
-            </div>
+            )
             })
-        } 
+        };
 
         // console.log(this.props.obj)
     let webAddress = (`http://www.${this.props.obj.website_url}`)
@@ -67,17 +72,13 @@ class TeamCard extends React.Component {
                 </Card.Description>
              </Card.Content>
              <Card.Content extra onClick={()=>this.teamIdClickHandler()}>
-                {/* {this.props.rosterArray !== [] ? console.log(this.props.rosterArray.queryResults.row) : null} */}
+
                  <Modal trigger={<Button>View Roster</Button>} >
                      {this.state.modalContainer ? 
-                    <Modal.Header>
-                        {playerArray}
-                    </Modal.Header>
+                        <Modal.Content>{playerArray}</Modal.Content>
                     : null
                      }
-                     {/* <RosterModal rosterArray={this.props.rosterArray}/> */}
                  </Modal>
-
 
              </Card.Content>
           </Card> 
