@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TeamCard from "./TeamCard"
-import { Grid, Button, Modal } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 
 class TeamContainer extends React.Component {
     state={

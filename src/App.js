@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import TeamContainer from './TeamContainer';
 // import RosterModal from "./RosterModal";
-import { Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
-import RosterModal from './RosterModal';
+// import { Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
+// import RosterModal from './RosterModal';
 
 class App extends React.Component {
   state={
