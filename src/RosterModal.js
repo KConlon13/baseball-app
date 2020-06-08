@@ -6,9 +6,9 @@ class RosterModal extends React.Component {
 
 
   render(){
-     if (this.props.rosterArray) {
-      //  console.log(this.props.rosterArray.roster_40.queryResults.row)
-    } 
+    //  if (this.props.rosterArray.length > 0) {
+    //    console.log(this.props.rosterArray.queryResults)
+    // } 
     return (
       <div className="RosterModal">
             <Modal.Header>Team Name Here</Modal.Header>
