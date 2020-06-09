@@ -67,14 +67,13 @@ class TeamCard extends React.Component {
                 </Card.Description>
              </Card.Content>
              <Card.Content extra onClick={()=>this.teamIdClickHandler()}>
-                 <Button>View Roster</Button>
+                 
                  {this.state.modalClicked ? 
                 <Modal trigger={<Button>View Roster</Button>} >
-                    {this.state.modalContainer ? 
-                    <Modal.Content>{playerArray}</Modal.Content> : null}
-                </Modal> : null
-            }
-
+                    {this.state.modalContainer && this.state.modalClicked ? 
+                    <Modal.Content>{playerArray}</Modal.Content> 
+                    : null }
+                </Modal> : null }
              </Card.Content>
           </Card> 
       </div>
