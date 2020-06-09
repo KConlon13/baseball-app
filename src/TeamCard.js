@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 // import RosterModal from "./RosterModal";
-import { Card, Icon, Modal, Button, Image } from 'semantic-ui-react'
+import { Card, Icon, Modal, Button, Image, Item } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
     state={
@@ -20,30 +20,25 @@ class TeamCard extends React.Component {
         .then(data => data !== [] ? (this.setState({modalContainer: data.roster_40.queryResults.row})) : null) 
       }
 
-      
-      
       render(){
         let playerArray;
         if (this.state.modalContainer !== []) {
             playerArray = this.state.modalContainer.map(p => {
                 console.log(p)
-            return (<Modal.Content>
-                <h2>{p.name_full}</h2>
-                <Modal.Content image>
-                <Image wrapped size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-                <Modal.Description>
-                    <ul>
-                        <li>Position: {p.position_txt}</li>
-                        <li>Bats: {p.bats}</li>
-                        <li>Height: {p.height_feet}'{p.height_inches}"</li>
-                        <li>Weight: {p.weight}</li>
-                    </ul>
-                </Modal.Description>
-                <br></br>
-                </Modal.Content>
-            </Modal.Content>
-            )
-            })
+            return (
+              <Item.Group>
+              <Item>
+                <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                <Item.Content>
+                    <Item.Header as='a'>{p.name_full}</Item.Header>
+                    <Item.Extra>Position: {p.position_txt}</Item.Extra>
+                    <Item.Extra>Bats: {p.bats}</Item.Extra>
+                    <Item.Extra>Height: {p.height_feet}'{p.height_inches}"</Item.Extra>
+                    <Item.Extra>Weight: {p.weight}</Item.Extra>
+                </Item.Content>
+              </Item>
+              </Item.Group>
+            )})
         };
 
         // console.log(this.props.obj)
@@ -72,13 +67,13 @@ class TeamCard extends React.Component {
                 </Card.Description>
              </Card.Content>
              <Card.Content extra onClick={()=>this.teamIdClickHandler()}>
-
-                 <Modal trigger={<Button>View Roster</Button>} >
-                     {this.state.modalContainer ? 
-                        <Modal.Content>{playerArray}</Modal.Content>
-                    : null
-                     }
-                 </Modal>
+                 <Button>View Roster</Button>
+                 {this.state.modalClicked ? 
+                <Modal trigger={<Button>View Roster</Button>} >
+                    {this.state.modalContainer ? 
+                    <Modal.Content>{playerArray}</Modal.Content> : null}
+                </Modal> : null
+            }
 
              </Card.Content>
           </Card> 
