@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 // import RosterModal from "./RosterModal";
-import { Card, Icon, Modal, Button, Image, Item } from 'semantic-ui-react'
+import { Card, Icon, Modal, Button, Item } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
     state={
@@ -66,14 +66,18 @@ class TeamCard extends React.Component {
                  </Card.Description>
                 </Card.Description>
              </Card.Content>
-             <Card.Content extra onClick={()=>this.teamIdClickHandler()}>
-                 
-                 {this.state.modalClicked ? 
-                <Modal trigger={<Button>View Roster</Button>} >
-                    {this.state.modalContainer && this.state.modalClicked ? 
-                    <Modal.Content>{playerArray}</Modal.Content> 
+             <Card.Content extra onMouseEnter={()=>this.teamIdClickHandler()}>
+                {this.state.modalClicked === false ?
+                    <Button className ="rosterButton">View Roster</Button>
                     : null }
-                </Modal> : null }
+
+                {this.state.modalClicked ? 
+                    <Modal trigger={<Button>View Roster</Button>} >
+                    {this.state.modalContainer && this.state.modalClicked ? 
+                        <Modal.Content>{playerArray}</Modal.Content> 
+                        : null }
+                    </Modal> 
+                    : null }
              </Card.Content>
           </Card> 
       </div>
