@@ -73,7 +73,7 @@ class TeamContainer extends React.Component {
             {/* {this.props.rosterArray !== [] ? console.log(this.props.rosterArray):null} */}
                 <Button.Group className="button-group">
                     <Button onClick={()=>this.allTeamsClickHandler()}>MLB</Button>
-                        <Button.Or />
+                        <Button.Or/>
                     <Button onClick={()=>this.nationalLeagueClickHandler()}>NL Only</Button>
                         <Button.Or />
                     <Button onClick={()=>this.americanLeagueClickHandler()}>AL Only</Button>

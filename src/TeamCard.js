@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 // import RosterModal from "./RosterModal";
-import { Card, Icon, Modal, Button, Item } from 'semantic-ui-react'
+import { Card, Icon, Modal, Button, Item, Divider, Header } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
     state={
@@ -30,7 +30,7 @@ class TeamCard extends React.Component {
               <Item>
                 <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
                 <Item.Content>
-                    <Item.Header as='a'>{p.name_full}</Item.Header>
+                    <Item.Header>{p.name_full}</Item.Header>
                     <Item.Extra>Position: {p.position_txt}</Item.Extra>
                     <Item.Extra>Bats: {p.bats}</Item.Extra>
                     <Item.Extra>Height: {p.height_feet}'{p.height_inches}"</Item.Extra>
@@ -52,32 +52,42 @@ class TeamCard extends React.Component {
           <Card color={colorTypeLeague}>
              <Card.Content>
                 <Card.Header href={webAddress} target="_blank" rel="noopener noreferrer">{this.props.obj.name_display_full}</Card.Header>
+                
                 <Card.Meta>
                     <span className='date'>Founded in {this.props.obj.first_year_of_play}</span>
                 </Card.Meta>
-                <Card.Description >
-                    {this.props.obj.address_line1}
-                </Card.Description>
-                <Card.Description>
-                {this.props.obj.address_city} {this.props.obj.address_state}
+
                 <Card.Description>
                 <Icon name='home' />
                  {this.props.obj.venue_name}
                  </Card.Description>
+
+                <Card.Description >
+                    {this.props.obj.address_line1}
                 </Card.Description>
+
+                <Card.Description>
+                {this.props.obj.address_city} {this.props.obj.address_state}
+                </Card.Description>
+
              </Card.Content>
              <Card.Content extra onMouseEnter={()=>this.teamIdClickHandler()}>
                 {this.state.modalClicked === false ?
-                    <Button className ="rosterButton">View Roster</Button>
+                    <Button>View Roster</Button>
                     : null }
 
                 {this.state.modalClicked ? 
                     <Modal trigger={<Button>View Roster</Button>} >
                     {this.state.modalContainer && this.state.modalClicked ? 
-                        <Modal.Content>{playerArray}</Modal.Content> 
+                        <Modal.Content>
+                            <Header as="h1">{this.props.obj.name_display_full} Roster</Header>
+                            <Divider/>
+                            <Modal.Content>{playerArray}</Modal.Content> 
+                        </Modal.Content>
                         : null }
                     </Modal> 
                     : null }
+
              </Card.Content>
           </Card> 
       </div>
