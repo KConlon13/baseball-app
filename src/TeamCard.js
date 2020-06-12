@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-// import RosterModal from "./RosterModal";
 import { Card, Icon, Modal, Button, Item, Divider, Header } from 'semantic-ui-react'
 
 class TeamCard extends React.Component {
@@ -41,7 +40,6 @@ class TeamCard extends React.Component {
             )})
         };
 
-        // console.log(this.props.obj)
     let webAddress = (`http://www.${this.props.obj.website_url}`)
 
     let colorTypeLeague;

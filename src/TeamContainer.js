@@ -70,7 +70,6 @@ class TeamContainer extends React.Component {
         
         return (
             <div className="TeamContainer">
-            {/* {this.props.rosterArray !== [] ? console.log(this.props.rosterArray):null} */}
                 <Button.Group className="button-group">
                     <Button onClick={()=>this.allTeamsClickHandler()}>MLB</Button>
                         <Button.Or/>
