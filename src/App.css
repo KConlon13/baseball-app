@@ -4,7 +4,9 @@
 }
 
 .TeamContainer {
-  margin: 60px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top: 50px;
   padding-left: 100px;
 }
 
@@ -23,32 +25,20 @@
   margin-top: -50px;
 }
 
+.ui.divider {
+  margin-left: 130px;
+  margin-right: 130px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ui.secondary.menu {
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 15px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

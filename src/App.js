@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TeamContainer from './TeamContainer';
-// import { Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 
 class App extends React.Component {
   state={
@@ -21,6 +21,24 @@ class App extends React.Component {
 
     return (
       <div className="App">
+
+        <div class="ui secondary menu">
+          <a class="active item">
+              Home
+          </a>
+          <a class="item">
+              Teams
+          </a>
+          <a class="item">
+              Scores
+          </a>
+          <div class="right menu">
+              <a class="ui item">
+              Logout
+              </a>
+          </div>
+        </div>
+        <Divider/>
         <TeamContainer teamsArray={this.state.mainContainer} teamIdClickHandler={this.teamIdClickHandler} rosterArray={this.state.modalContainer}/>
       </div>
     );
