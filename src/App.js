@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import TeamContainer from './TeamContainer';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Divider } from 'semantic-ui-react'
+// import { } from 'semantic-ui-react'
 import Players from "./Players";
 import Scores from "./Scores";
 import Navbar from "./Navbar";
