@@ -30,31 +30,14 @@ class App extends React.Component {
 
     return (
       <div className="App">
-
         <Router>
-        {/* <div class="ui secondary menu"> */}
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={TeamHomePage}>
-              {/* <a class="active item">Home</a> */}
-            </Route>
-            <Route path="/players" component={Players}>
-               {/* <a class="item">Players</a> */}
-          </Route>
-          <Route path="/scores" component={Scores}>
-              {/* <a class="item">Scores</a> */}
-          </Route>
-
-          {/* <div class="right menu">
-              <a class="ui item">Logout</a>
-          </div> */}
-          </Switch>
-
-        {/* </div> */}
+            <Navbar />
+            <Switch>
+                <Route exact path="/" component={TeamHomePage}/>
+                <Route path="/players" component={Players}/>
+                <Route path="/scores" component={Scores}/>
+            </Switch>
         </Router>
-
-        {/* <Divider/> */}
-        {/* <TeamContainer teamsArray={this.state.mainContainer} teamIdClickHandler={this.teamIdClickHandler} rosterArray={this.state.modalContainer}/> */}
       </div>
     );
   }

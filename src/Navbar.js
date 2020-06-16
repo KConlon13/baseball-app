@@ -5,26 +5,65 @@ import { Link } from 'react-router-dom';
 
 
 class Navbar extends React.Component {
+    state={
+        homeActive: true,
+        playersActive: false,
+        scoresActive: false,
+    }
 
 
+    homeItemHandler = () => {
+        this.setState({
+            homeActive: true,
+            playersActive: false,
+            scoresActive: false,
+        })
+    }
+    playersItemHandler = () => {
+        this.setState({
+            homeActive: false,
+            playersActive: true,
+            scoresActive: false,
+        })
+    }
+    scoresItemHandler = () => {
+        this.setState({
+            homeActive: false,
+            playersActive: false,
+            scoresActive: true,
+        })
+    }
 
     render(){
+
         return(
             <div class="ui secondary menu">
                 <Link to="/">
-                    <a class="item">
+                    {this.state.homeActive === true ? 
+                    <a class="active item" onClick={() => this.homeItemHandler()}>
                         Home
-                    </a>
+                    </a> : 
+                    <a class="item" onClick={() => this.homeItemHandler()}>
+                    Home
+                    </a> }
                 </Link>
                 <Link to="/players">
-                    <a class="item">
+                    {this.state.playersActive === true ? 
+                    <a class="active item" onClick={() => this.playersItemHandler()}>
                         Players
-                    </a>
+                    </a> : 
+                    <a class="item" onClick={() => this.playersItemHandler()}>
+                    Players
+                    </a> }
                 </Link>
                 <Link to="/scores">
-                    <a class="item">
+                    {this.state.scoresActive === true ? 
+                    <a class="active item" onClick={() => this.scoresItemHandler()}>
                         Scores
-                    </a>
+                    </a> : 
+                    <a class="item" onClick={() => this.scoresItemHandler()}>
+                    Scores
+                    </a> }
                 </Link>
 
                 <div class="right menu">
