@@ -41,37 +41,37 @@ class Navbar extends React.Component {
                 <div class="ui secondary menu">
                     <Link to="/">
                         {this.state.homeActive === true ? 
-                        <a class="active item" onClick={() => this.homeItemHandler()}>
+                        <li class="active item" onClick={() => this.homeItemHandler()}>
                             Home
-                        </a> : 
-                        <a class="item" onClick={() => this.homeItemHandler()}>
+                        </li> : 
+                        <li class="item" onClick={() => this.homeItemHandler()}>
                         Home
-                        </a> }
+                        </li> }
                     </Link>
                     <Link to="/players">
                         {this.state.playersActive === true ? 
-                        <a class="active item" onClick={() => this.playersItemHandler()}>
+                        <li class="active item" onClick={() => this.playersItemHandler()}>
                             Players
-                        </a> : 
-                        <a class="item" onClick={() => this.playersItemHandler()}>
+                        </li> : 
+                        <li class="item" onClick={() => this.playersItemHandler()}>
                         Players
-                        </a> }
+                        </li> }
                     </Link>
                     <Link to="/scores">
                         {this.state.scoresActive === true ? 
-                        <a class="active item" onClick={() => this.scoresItemHandler()}>
+                        <li class="active item" onClick={() => this.scoresItemHandler()}>
                             Scores
-                        </a> : 
-                        <a class="item" onClick={() => this.scoresItemHandler()}>
+                        </li> : 
+                        <li class="item" onClick={() => this.scoresItemHandler()}>
                         Scores
-                        </a> }
+                        </li> }
                     </Link>
 
                     <div class="right menu">
                         {/* <Link> */}
-                            <a class="ui item">
+                            <li class="item">
                             Logout
-                            </a>
+                            </li>
                         {/* </Link> */}
                     </div>
                 </div>
