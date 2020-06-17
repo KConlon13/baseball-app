@@ -3,7 +3,6 @@ import './App.css';
 import { Search } from 'semantic-ui-react'
 import _ from 'lodash'; 
 
-let searchTerm = ""
 let results
 class Players extends React.Component {
     state={
@@ -17,27 +16,31 @@ class Players extends React.Component {
             fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
             .then(response=>response.json())
             .then(data => this.setState({playerData: data.search_player_all.queryResults.row}))
-
-            results = this.state.playerData.map(p => {
-                // console.log("this here is a player", p),
-                return <div class="ui segment">
-                    <h4>{p.name_display_first_last}</h4>
-                </div>
-            })
         } else {
             value = ""
         }
     }
 
+    
     // ORIGINAL FETCH
     // componentDidMount(){
-    //     fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
-    //     .then(response=>response.json())
-    //     .then(data => this.setState({playerData: data})) 
-    // }
-
+        //     fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
+        //     .then(response=>response.json())
+        //     .then(data => this.setState({playerData: data})) 
+        // }
+        
     render(){
-    if (this.state.playerData != []){
+
+    if (this.state.playerData.length > 0){
+        results = this.state.playerData.map(p => {
+            // console.log("this here is a player", p),
+            return <div class="ui segment">
+                <h4>{p.name_display_first_last}</h4>
+            </div>
+        })
+    }
+
+    if (this.state.playerData !== []){
         console.log(this.state.playerData)
     }
 
