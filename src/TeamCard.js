@@ -23,7 +23,7 @@ class TeamCard extends React.Component {
         let playerArray;
         if (this.state.modalContainer !== []) {
             playerArray = this.state.modalContainer.map(p => {
-                console.log(p)
+                // console.log(p)
             return (
               <Item.Group>
               <Item>

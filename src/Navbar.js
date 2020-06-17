@@ -69,7 +69,7 @@ class Navbar extends React.Component {
 
                     <div class="right menu">
                         {/* <Link> */}
-                            <li class="item">
+                            <li class="ui item">
                             Logout
                             </li>
                         {/* </Link> */}

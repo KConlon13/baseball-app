@@ -1,14 +1,61 @@
 import React from 'react';
 import './App.css';
-// import {  } from 'semantic-ui-react'
+import { Search } from 'semantic-ui-react'
+import _ from 'lodash'; 
 
+let searchTerm = ""
+let results
 class Players extends React.Component {
+    state={
+        playerData: [],
+    }
 
+    handleSearchChange = (e, { value }) => {
+        let searchTerm = value
+        console.log(searchTerm)
+        if (value.length > 0 || this.state.playerData > 0){
+            fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
+            .then(response=>response.json())
+            .then(data => this.setState({playerData: data.search_player_all.queryResults.row}))
+
+            results = this.state.playerData.map(p => {
+                // console.log("this here is a player", p),
+                return <div class="ui segment">
+                    <h4>{p.name_display_first_last}</h4>
+                </div>
+            })
+        } else {
+            value = ""
+        }
+    }
+
+    // ORIGINAL FETCH
+    // componentDidMount(){
+    //     fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
+    //     .then(response=>response.json())
+    //     .then(data => this.setState({playerData: data})) 
+    // }
 
     render(){
-        return(
+    if (this.state.playerData != []){
+        console.log(this.state.playerData)
+    }
+
+        return (
             <div>
-                <h1>Players Page</h1>
+                <h1>Search Player Stats</h1>
+                <Search
+                    fluid
+                    // loading={isLoading}
+                    // onResultSelect={this.handleResultSelect}
+                    onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                    leading: true,
+                    })}
+                    // results={results}
+                    // value={value}
+                    // {...this.props}
+                />
+                {results}
             </div>
         )
     }
