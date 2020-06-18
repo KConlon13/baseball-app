@@ -46,22 +46,51 @@ class Players extends React.Component {
             fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='a%25'`)
             .then(response=>response.json())
             .then(data => this.setState({playerData: data.search_player_all.queryResults.row})) 
-        }
-        
-    render(){
+    }
+    
+    render(){ 
     let results
     if (this.state.playerData) {
         results = this.state.playerData.map(p => {
-            console.log(p)
-            return <div class="ui segment">
-                <div>
-                    <Label circular color="blue">{p.position}</Label>
-                    <h4>{p.name_display_first_last}</h4>
-                </div>
-                <br/>
-                    <Label basic color="red">{p.team_full}</Label>
-            </div>
-        })
+            // console.log(p)
+
+            let posColor
+            switch(p.position){
+                case "P":
+                    posColor="blue"
+                    break;
+                case "1B":
+                    posColor="red"
+                    break;
+                case "2B":
+                    posColor="teal"
+                    break;
+                case "SS":
+                    posColor="green"
+                    break;
+                case "3B":
+                    posColor="olive"
+                    break;
+                case "OF":
+                    posColor="purple"
+                    break;
+                default:
+                    posColor="pink"
+                    break;
+            }
+
+            return <div class="ui centered cards">
+                        <div class="ui card">
+                            <div class="content">
+                            <div class="header">{p.name_display_first_last}</div>
+                            <div class="meta">{p.team_full}</div>
+                                <div class="description">
+                                    <Label circular color={posColor}>{p.position}</Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            })
     } else {
         results = (
             <div class="results transition">
@@ -74,17 +103,6 @@ class Players extends React.Component {
         return (
             <div>
                 <h1>Search Player Stats</h1>
-                {/* <Search
-                    fluid
-                    // loading={isLoading}
-                    // onResultSelect={this.handleResultSelect}
-                    onSearchChange={_.debounce(this.handleSearch, 500, {
-                    leading: true,
-                    })}
-                    // results={results}
-                    // value={value}
-                    // {...this.props}
-                /> */}
                   <Input
                     onChange={(e)=>this.handleOnChange(e)}
                     icon={<Icon name='search' inverted circular link onClick={(e)=> this.handleSearch(e)} onKeyPress={this.keyPressed}/>}
