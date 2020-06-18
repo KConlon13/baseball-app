@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Input, Icon } from 'semantic-ui-react'
+import { Input, Icon, Label, Card } from 'semantic-ui-react'
 // import _ from 'lodash'; 
 
 class Players extends React.Component {
@@ -10,25 +10,26 @@ class Players extends React.Component {
     }
 
     handleOnChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setState({
             searchData: e.target.value
         })
         this.handleSearch(e)
     }
 
-
+    // componentDidMount(){
+    //     this.handleSearch()
+    // }
     handleSearch = (e) => {
         let searchTerm = this.state.searchData
         // console.log(e.target)
-        if (this.state.searchData !== []){
+        // if (e.target.value !== null){
             fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
             .then(response=>response.json())
-            .then(data => this.setState({playerData: data.search_player_all.queryResults.row}, console.log("YO")))
-
-        } else {
-            console.log("Ah fuck")
-        }
+            .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null)
+        // } else {
+            // console.log("Ah fuck")
+        // }
     }
 
     keyPressed = (e) => {
@@ -41,26 +42,32 @@ class Players extends React.Component {
     }
 
     // ORIGINAL FETCH
-    // componentDidMount(){
-        //     fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
-        //     .then(response=>response.json())
-        //     .then(data => this.setState({playerData: data})) 
-        // }
+    componentWillMount(){
+            fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='a%25'`)
+            .then(response=>response.json())
+            .then(data => this.setState({playerData: data.search_player_all.queryResults.row})) 
+        }
         
     render(){
     let results
-    if (this.state.playerData !== []){
+    if (this.state.playerData) {
         results = this.state.playerData.map(p => {
-            // console.log("this here is a player", p),
+            console.log(p)
             return <div class="ui segment">
-                <h4>{p.name_display_first_last}</h4>
+                <div>
+                    <Label circular color="blue">{p.position}</Label>
+                    <h4>{p.name_display_first_last}</h4>
+                </div>
+                <br/>
+                    <Label basic color="red">{p.team_full}</Label>
             </div>
         })
     } else {
-        return (
+        results = (
             <div class="results transition">
+            <br/>
             <div class="message empty"><div class="header">No results found.</div></div>
-          </div>
+            </div>
         )
     }
 
@@ -83,6 +90,8 @@ class Players extends React.Component {
                     icon={<Icon name='search' inverted circular link onClick={(e)=> this.handleSearch(e)} onKeyPress={this.keyPressed}/>}
                     placeholder='Search...'
                   />
+                  <br/>
+                  <br/>
                 {results}
             </div>
         )
