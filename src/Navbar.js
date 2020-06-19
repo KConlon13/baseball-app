@@ -3,14 +3,12 @@ import './App.css';
 import { Divider } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-
 class Navbar extends React.Component {
     state={
         homeActive: true,
         playersActive: false,
         scoresActive: false,
     }
-
 
     homeItemHandler = () => {
         this.setState({
@@ -41,10 +39,10 @@ class Navbar extends React.Component {
                 <div class="ui secondary menu">
                     <Link to="/">
                         {this.state.homeActive === true ? 
-                        <li class="active item" onClick={() => this.homeItemHandler()}>
+                        <li className="active item" onClick={() => this.homeItemHandler()}>
                             Home
                         </li> : 
-                        <li class="item" onClick={() => this.homeItemHandler()}>
+                        <li className="item" onClick={() => this.homeItemHandler()}>
                         Home
                         </li> }
                     </Link>

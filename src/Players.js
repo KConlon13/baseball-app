@@ -6,7 +6,8 @@ import { Input, Icon, Label, Card } from 'semantic-ui-react'
 class Players extends React.Component {
     state={
         playerData: [],
-        searchData: []
+        searchData: "", //changed to string from array
+        searchClicked: false,
     }
 
     handleOnChange = (e) => {
@@ -14,46 +15,39 @@ class Players extends React.Component {
         this.setState({
             searchData: e.target.value
         })
-        this.handleSearch(e)
+        // this.handleSearch(e)
     }
 
-    // componentDidMount(){
-    //     this.handleSearch()
-    // }
-    handleSearch = (e) => {
-        let searchTerm = this.state.searchData
+    handleSearchClick = () => {
+        // let searchTerm = this.state.searchData
         // console.log(e.target)
-        // if (e.target.value !== null){
-            fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
-            .then(response=>response.json())
-            .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null)
+        // this.setState({
+        //     searchClicked: true
+        // })
+        // if (this.state.searchClicked === true){
+        //     fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
+        //     .then(response=>response.json())
+        //     .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row, searchClicked: false, searchData: ""}) : this.setState({playerData: [], searchClicked: false, searchData: ""}))
         // } else {
-            // console.log("Ah fuck")
+        //     console.log("Ah fuck")
         // }
+
+        this.makeApiCall(this.state.searchData)
     }
 
-    keyPressed = (e) => {
-        if (e.key === "Enter"){
-            this.setState({
-                searchData: e.target.value
-            })
-            this.handleSearch(e)
-        }
-    }
+    makeApiCall = (searchInput) => {
+        let searchUrl = `http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchInput}%25'`;
 
-    // ORIGINAL FETCH
-    componentWillMount(){
-            fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='a%25'`)
-            .then(response=>response.json())
-            .then(data => this.setState({playerData: data.search_player_all.queryResults.row})) 
+        fetch(searchUrl)
+        .then(resp=>resp.json())
+        .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null)
     }
     
     render(){ 
     let results
-    if (this.state.playerData) {
+    if (this.state.playerData !== []) {
         results = this.state.playerData.map(p => {
             // console.log(p)
-
             let posColor
             switch(p.position){
                 case "P":
@@ -79,17 +73,17 @@ class Players extends React.Component {
                     break;
             }
 
-            return <div class="ui centered cards">
-                        <div class="ui card">
-                            <div class="content">
-                            <div class="header">{p.name_display_first_last}</div>
-                            <div class="meta">{p.team_full}</div>
-                                <div class="description">
-                                    <Label circular color={posColor}>{p.position}</Label>
-                                </div>
+        return <div class="ui centered cards">
+                    <div class="ui card">
+                        <div class="content">
+                        <div class="header">{p.name_display_first_last}</div>
+                        <div class="meta">{p.team_full}</div>
+                            <div class="description">
+                                <Label circular color={posColor}>{p.position}</Label>
                             </div>
                         </div>
                     </div>
+                </div>
             })
     } else {
         results = (
@@ -103,11 +97,18 @@ class Players extends React.Component {
         return (
             <div>
                 <h1>Search Player Stats</h1>
-                  <Input
-                    onChange={(e)=>this.handleOnChange(e)}
-                    icon={<Icon name='search' inverted circular link onClick={(e)=> this.handleSearch(e)} onKeyPress={this.keyPressed}/>}
-                    placeholder='Search...'
-                  />
+                  {/* <Input> */}
+                        <input 
+                            name="text"
+                            type="text"
+                            placeholder="Search..."
+                            onChange={(e)=>this.handleOnChange(e)}
+                            value={this.state.searchData}
+                        />
+                        <button name='search' inverted circular link onClick={() => this.handleSearchClick()}>
+                            <Icon name="search"/>
+                        </button>
+                  {/* </Input> */}
                   <br/>
                   <br/>
                 {results}
