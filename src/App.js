@@ -26,7 +26,6 @@ class App extends React.Component {
          const TeamHomePage = () => {
           return <TeamContainer teamsArray={this.state.mainContainer} teamIdClickHandler={this.teamIdClickHandler} rosterArray={this.state.modalContainer}/>
          }
-    
 
     return (
       <div className="App">
