@@ -6,46 +6,51 @@ import { Input, Icon, Label, Card } from 'semantic-ui-react'
 class Players extends React.Component {
     state={
         playerData: [],
-        searchData: "", //changed to string from array
+        searchTerm: '',
         searchClicked: false,
     }
 
     handleOnChange = (e) => {
         // console.log(e.target.value)
         this.setState({
-            searchData: e.target.value
+            searchTerm: e.target.value
         })
-        // this.handleSearch(e)
     }
 
     handleSearchClick = () => {
-        // let searchTerm = this.state.searchData
-        // console.log(e.target)
-        // this.setState({
-        //     searchClicked: true
-        // })
-        // if (this.state.searchClicked === true){
-        //     fetch(`http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchTerm}%25'`)
-        //     .then(response=>response.json())
-        //     .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row, searchClicked: false, searchData: ""}) : this.setState({playerData: [], searchClicked: false, searchData: ""}))
-        // } else {
-        //     console.log("Ah fuck")
-        // }
-
-        this.makeApiCall(this.state.searchData)
+        this.makeApiCall(this.state.searchTerm)
     }
 
     makeApiCall = (searchInput) => {
-        let searchUrl = `http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${searchInput}%25'`;
+        console.log(searchInput)
+        if (searchInput.split(' ').length > 1) {
+            searchInput = searchInput.split(' ').reverse()[0]
+        }
+    }
 
-        fetch(searchUrl)
-        .then(resp=>resp.json())
-        .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null)
+    // SOLUTION!!!!
+    // Needed this below! VVV
+    // Need to rewrite code to search through the array thats been fetched, and return and render those cards, rather than taking the search item and fetching that
+    // Take the search term from handleSearchClick and add another state array (or container) to push all of the matching items in from the original fetch to be displayed
+
+    componentDidMount(){
+        fetch("http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='%25'")
+        .then(resp => resp.json())
+        .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null )
     }
     
     render(){ 
     let results
-    if (this.state.playerData !== []) {
+    if (this.state.playerData === []) {
+        
+            return results = (
+                <div class="results transition">
+                <br/>
+                <div class="message empty"><div class="header">No results found.</div></div>
+                </div>
+            )
+    } else {
+
         results = this.state.playerData.map(p => {
             // console.log(p)
             let posColor
@@ -73,7 +78,7 @@ class Players extends React.Component {
                     break;
             }
 
-        return <div class="ui centered cards">
+        return  <div class="ui centered cards">
                     <div class="ui card">
                         <div class="content">
                         <div class="header">{p.name_display_first_last}</div>
@@ -85,30 +90,69 @@ class Players extends React.Component {
                     </div>
                 </div>
             })
-    } else {
-        results = (
-            <div class="results transition">
-            <br/>
-            <div class="message empty"><div class="header">No results found.</div></div>
-            </div>
-        )
     }
+    // if (this.state.playerData !== []) {
+    //     results = this.state.playerData.map(p => {
+    //         // console.log(p)
+    //         let posColor
+    //         switch(p.position){
+    //             case "P":
+    //                 posColor="blue"
+    //                 break;
+    //             case "1B":
+    //                 posColor="red"
+    //                 break;
+    //             case "2B":
+    //                 posColor="teal"
+    //                 break;
+    //             case "SS":
+    //                 posColor="green"
+    //                 break;
+    //             case "3B":
+    //                 posColor="olive"
+    //                 break;
+    //             case "OF":
+    //                 posColor="purple"
+    //                 break;
+    //             default:
+    //                 posColor="pink"
+    //                 break;
+    //         }
+
+    //     return  <div class="ui centered cards">
+    //                 <div class="ui card">
+    //                     <div class="content">
+    //                     <div class="header">{p.name_display_first_last}</div>
+    //                     <div class="meta">{p.team_full}</div>
+    //                         <div class="description">
+    //                             <Label circular color={posColor}>{p.position}</Label>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         })
+    // } else {
+    //    return results = (
+    //         <div class="results transition">
+    //         <br/>
+    //         <div class="message empty"><div class="header">No results found.</div></div>
+    //         </div>
+    //     )
+    // }
 
         return (
             <div>
                 <h1>Search Player Stats</h1>
-                  {/* <Input> */}
                         <input 
                             name="text"
                             type="text"
-                            placeholder="Search..."
+                            placeholder="Search By Last Name"
                             onChange={(e)=>this.handleOnChange(e)}
-                            value={this.state.searchData}
+                            value={this.state.searchTerm}
                         />
                         <button name='search' inverted circular link onClick={() => this.handleSearchClick()}>
                             <Icon name="search"/>
                         </button>
-                  {/* </Input> */}
                   <br/>
                   <br/>
                 {results}
