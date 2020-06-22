@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Input, Icon, Label, Card } from 'semantic-ui-react'
+import { Input, Icon, Label, Card, Button } from 'semantic-ui-react'
 // import _ from 'lodash'; 
 
 class Players extends React.Component {
@@ -17,22 +17,55 @@ class Players extends React.Component {
         })
     }
 
-    handleSearchClick = () => {
+    handleSearchClick = (e) => {
+        document.getElementById("searchInput").value = ""
         this.initiateSearch(this.state.searchTerm)
     }
 
     initiateSearch = (searchInput) => {
         searchInput = searchInput.toLowerCase()
-        console.log(searchInput)
         let results = []
         this.state.playerData.map(player => {
             let lastName = player.name_last.toLowerCase()
             let firstName = player.name_first.toLowerCase()
             let fullName = player.name_display_first_last.toLowerCase()
-            if (searchInput === lastName || searchInput === firstName || searchInput === fullName){
-                console.log("this is what im working on")
+            // if (
+            //     searchInput === fullName ||
+            //     // searchInput.slice(0, 3) === lastName.slice(0, 3) ||
+            //     // searchInput.slice(0, 3) === firstName.slice(0, 3) ||
+            //     // searchInput.slice(0, 4) === lastName.slice(0, 4) ||
+            //     // searchInput.slice(0, 4) === firstName.slice(0, 4) ||
+            //     // searchInput.slice(0, 5) === lastName.slice(0, 5) ||
+            //     // searchInput.slice(0, 5) === firstName.slice(0, 5) ||
+            //     searchInput === lastName || 
+            //     searchInput === firstName
+            //     ){
+            //     results.push(player)
+            // }
+
+            // Test 1
+            if (searchInput === fullName){
                 results.push(player)
-            }
+            } else if(searchInput === lastName){
+                results.push(player)
+            } else if (searchInput === firstName){
+                results.push(player)
+            } 
+            // else if (searchInput.slice(0, 3) === lastName.slice(0, 3)){
+            //     results.push(player)
+            // } else if (searchInput.slice(0, 3) === firstName.slice(0, 3)){
+            //     results.push(player)
+            // } else if (searchInput.slice(0, 4) === lastName.slice(0, 4)){
+            //     results.push(player)
+            // } else if (searchInput.slice(0, 4) === firstName.slice(0, 4)){
+            //     results.push(player)
+            // } else if (searchInput.slice(0, 5) === lastName.slice(0, 5)){
+            //     results.push(player)
+            // } else if (searchInput.slice(0, 5) === firstName.slice(0, 5)){
+            //     results.push(player)
+            // }
+
+
         })
         this.setState({
             searchResults: results
@@ -47,8 +80,14 @@ class Players extends React.Component {
     
     render(){ 
     let results
-    if (this.state.searchResults.length === 0 && this.state.searchClicked === true) {
-        return results = (
+
+    // NEXT TASK is to fix the 'No Results Found' feature to only show when a search was completed
+    // Secondary Task is to set up onClick for the enter button
+    // Tertiary Task is to allow search to pick up 
+    // Side Task to clear search field after search has been completed
+
+    if (this.state.searchResults.length === 0 ) {
+        results = (
             <div class="results transition">
                 <br/>
                 <div class="message empty"><div class="header">No results found.</div></div>
@@ -96,24 +135,24 @@ class Players extends React.Component {
             <div>
                 <h1>Search Player Stats</h1>
                         <input 
+                            id="searchInput"
                             name="text"
                             type="text"
                             placeholder="Search for Player"
                             onChange={(e)=>this.handleOnChange(e)}
                             value={this.state.searchTerm}
                         />
-                        <button name='search' inverted circular link onClick={() => this.handleSearchClick()}>
+                        <button name='search' inverted circular link onClick={(e) => this.handleSearchClick(e)}>
                             <Icon name="search"/>
                         </button>
                   <br/>
                   <br/>
-                {/* {results} */}
-                {this.state.searchResults.length === 0 && this.state.searchClicked === true ? 
+                {results}
+                {/* {this.state.searchResults.length === 0 && this.state.searchClicked === true ? 
                     <div class="results transition">
                     <br/>
                     <div class="message empty"><div class="header">No results found.</div></div>
-                </div> : results
-            }
+                </div> : results } */}
             </div>
         )
     }
