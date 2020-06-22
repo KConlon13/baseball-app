@@ -8,30 +8,36 @@ class Players extends React.Component {
         playerData: [],
         searchTerm: '',
         searchClicked: false,
+        searchResults: [],
     }
 
     handleOnChange = (e) => {
-        // console.log(e.target.value)
         this.setState({
             searchTerm: e.target.value
         })
     }
 
     handleSearchClick = () => {
-        this.makeApiCall(this.state.searchTerm)
+        this.initiateSearch(this.state.searchTerm)
     }
 
-    makeApiCall = (searchInput) => {
+    initiateSearch = (searchInput) => {
+        searchInput = searchInput.toLowerCase()
         console.log(searchInput)
-        if (searchInput.split(' ').length > 1) {
-            searchInput = searchInput.split(' ').reverse()[0]
-        }
+        let results = []
+        this.state.playerData.map(player => {
+            let lastName = player.name_last.toLowerCase()
+            let firstName = player.name_first.toLowerCase()
+            let fullName = player.name_display_first_last.toLowerCase()
+            if (searchInput === lastName || searchInput === firstName || searchInput === fullName){
+                console.log("this is what im working on")
+                results.push(player)
+            }
+        })
+        this.setState({
+            searchResults: results
+        })
     }
-
-    // SOLUTION!!!!
-    // Needed this below! VVV
-    // Need to rewrite code to search through the array thats been fetched, and return and render those cards, rather than taking the search item and fetching that
-    // Take the search term from handleSearchClick and add another state array (or container) to push all of the matching items in from the original fetch to be displayed
 
     componentDidMount(){
         fetch("http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='%25'")
@@ -41,18 +47,14 @@ class Players extends React.Component {
     
     render(){ 
     let results
-    if (this.state.playerData === []) {
-        
-            return results = (
-                <div class="results transition">
+    if (this.state.searchResults.length === 0 && this.state.searchClicked === true) {
+        return results = (
+            <div class="results transition">
                 <br/>
                 <div class="message empty"><div class="header">No results found.</div></div>
-                </div>
-            )
-    } else {
-
-        results = this.state.playerData.map(p => {
-            // console.log(p)
+            </div>
+    )} else {
+        results = this.state.searchResults.map(p => {
             let posColor
             switch(p.position){
                 case "P":
@@ -76,8 +78,7 @@ class Players extends React.Component {
                 default:
                     posColor="pink"
                     break;
-            }
-
+        }
         return  <div class="ui centered cards">
                     <div class="ui card">
                         <div class="content">
@@ -91,62 +92,13 @@ class Players extends React.Component {
                 </div>
             })
     }
-    // if (this.state.playerData !== []) {
-    //     results = this.state.playerData.map(p => {
-    //         // console.log(p)
-    //         let posColor
-    //         switch(p.position){
-    //             case "P":
-    //                 posColor="blue"
-    //                 break;
-    //             case "1B":
-    //                 posColor="red"
-    //                 break;
-    //             case "2B":
-    //                 posColor="teal"
-    //                 break;
-    //             case "SS":
-    //                 posColor="green"
-    //                 break;
-    //             case "3B":
-    //                 posColor="olive"
-    //                 break;
-    //             case "OF":
-    //                 posColor="purple"
-    //                 break;
-    //             default:
-    //                 posColor="pink"
-    //                 break;
-    //         }
-
-    //     return  <div class="ui centered cards">
-    //                 <div class="ui card">
-    //                     <div class="content">
-    //                     <div class="header">{p.name_display_first_last}</div>
-    //                     <div class="meta">{p.team_full}</div>
-    //                         <div class="description">
-    //                             <Label circular color={posColor}>{p.position}</Label>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         })
-    // } else {
-    //    return results = (
-    //         <div class="results transition">
-    //         <br/>
-    //         <div class="message empty"><div class="header">No results found.</div></div>
-    //         </div>
-    //     )
-    // }
-
         return (
             <div>
                 <h1>Search Player Stats</h1>
                         <input 
                             name="text"
                             type="text"
-                            placeholder="Search By Last Name"
+                            placeholder="Search for Player"
                             onChange={(e)=>this.handleOnChange(e)}
                             value={this.state.searchTerm}
                         />
@@ -155,7 +107,13 @@ class Players extends React.Component {
                         </button>
                   <br/>
                   <br/>
-                {results}
+                {/* {results} */}
+                {this.state.searchResults.length === 0 && this.state.searchClicked === true ? 
+                    <div class="results transition">
+                    <br/>
+                    <div class="message empty"><div class="header">No results found.</div></div>
+                </div> : results
+            }
             </div>
         )
     }
