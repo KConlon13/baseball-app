@@ -18,6 +18,7 @@ class Players extends React.Component {
     }
 
     handleSearchClick = (e) => {
+        e.preventDefault();
         document.getElementById("searchInput").value = ""
         this.initiateSearch(this.state.searchTerm)
     }
@@ -77,12 +78,12 @@ class Players extends React.Component {
         .then(resp => resp.json())
         .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null )
     }
-    
+
     render(){ 
     let results
 
     // NEXT TASK is to fix the 'No Results Found' feature to only show when a search was completed
-    // Secondary Task is to set up onClick for the enter button
+    // Secondary Task is to set up onClick for the enter button DONE
     // Tertiary Task is to allow search to pick up 
     // Side Task to clear search field after search has been completed
 
@@ -134,6 +135,7 @@ class Players extends React.Component {
         return (
             <div>
                 <h1>Search Player Stats</h1>
+                    <form onSubmit={(e)=> this.handleSearchClick(e)}>
                         <input 
                             id="searchInput"
                             name="text"
@@ -141,10 +143,11 @@ class Players extends React.Component {
                             placeholder="Search for Player"
                             onChange={(e)=>this.handleOnChange(e)}
                             value={this.state.searchTerm}
-                        />
-                        <button name='search' inverted circular link onClick={(e) => this.handleSearchClick(e)}>
+                            />
+                        <button name='search' id="searchButton" type="submit" inverted circular link >
                             <Icon name="search"/>
                         </button>
+                    </form>
                   <br/>
                   <br/>
                 {results}
