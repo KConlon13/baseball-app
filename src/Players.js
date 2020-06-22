@@ -17,10 +17,13 @@ class Players extends React.Component {
         })
     }
 
+    
     handleSearchClick = (e) => {
         e.preventDefault();
-        document.getElementById("searchInput").value = ""
         this.initiateSearch(this.state.searchTerm)
+        this.setState({
+            searchTerm: ""
+        })
     }
 
     initiateSearch = (searchInput) => {
@@ -86,6 +89,12 @@ class Players extends React.Component {
     // Secondary Task is to set up onClick for the enter button DONE
     // Tertiary Task is to allow search to pick up 
     // Side Task to clear search field after search has been completed
+
+    // let searchField = document.getElementById("searchInput")
+    // console.log(searchField)
+    // if (searchField.value !== "") {
+    //     console.log(searchField.value)
+    // }
 
     if (this.state.searchResults.length === 0 ) {
         results = (
