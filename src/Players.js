@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Input, Icon, Label, Card, Button } from 'semantic-ui-react'
+import { Icon, Label } from 'semantic-ui-react'
 // import _ from 'lodash'; 
 
 class Players extends React.Component {
@@ -17,12 +17,12 @@ class Players extends React.Component {
         })
     }
 
-    
     handleSearchClick = (e) => {
         e.preventDefault();
         this.initiateSearch(this.state.searchTerm)
         this.setState({
-            searchTerm: ""
+            searchTerm: "",
+            searchClicked: true,
         })
     }
 
@@ -68,8 +68,7 @@ class Players extends React.Component {
             // } else if (searchInput.slice(0, 5) === firstName.slice(0, 5)){
             //     results.push(player)
             // }
-
-
+            return results;
         })
         this.setState({
             searchResults: results
@@ -82,21 +81,12 @@ class Players extends React.Component {
         .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null )
     }
 
+    // Next Task is to allow search to find players based on only a few letters
+
     render(){ 
     let results
 
-    // NEXT TASK is to fix the 'No Results Found' feature to only show when a search was completed
-    // Secondary Task is to set up onClick for the enter button DONE
-    // Tertiary Task is to allow search to pick up 
-    // Side Task to clear search field after search has been completed
-
-    // let searchField = document.getElementById("searchInput")
-    // console.log(searchField)
-    // if (searchField.value !== "") {
-    //     console.log(searchField.value)
-    // }
-
-    if (this.state.searchResults.length === 0 ) {
+    if (this.state.searchResults.length === 0 && this.state.searchClicked === true) {
         results = (
             <div class="results transition">
                 <br/>
