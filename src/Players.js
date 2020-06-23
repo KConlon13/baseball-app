@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Icon, Label } from 'semantic-ui-react'
+import { Icon, Label, Input, Button } from 'semantic-ui-react'
 // import _ from 'lodash'; 
 
 class Players extends React.Component {
@@ -33,25 +33,23 @@ class Players extends React.Component {
             let lastName = player.name_last.toLowerCase()
             let firstName = player.name_first.toLowerCase()
             let fullName = player.name_display_first_last.toLowerCase()
-
             if (searchInput === fullName){
                 results.push(player)
             } else if(searchInput === lastName){
                 results.push(player)
             } else if (searchInput === firstName){
                 results.push(player)
-            } 
-            else if (searchInput.slice(0, 3) === lastName.slice(0, 3)){
+            } else if (searchInput.length === 3 && searchInput.slice(0,3) === lastName.slice(0, 3)){
                 results.push(player)
-            } else if (searchInput.slice(0, 3) === firstName.slice(0, 3)){
+            } else if (searchInput.length === 3 && searchInput.slice(0,3) === firstName.slice(0, 3)){
                 results.push(player)
-            } else if (searchInput.slice(0, 4) === lastName.slice(0, 4)){
+            } else if (searchInput.length === 4 && searchInput.slice(0, 4) === lastName.slice(0, 4)){
                 results.push(player)
-            } else if (searchInput.slice(0, 4) === firstName.slice(0, 4)){
+            } else if (searchInput.length === 4 && searchInput.slice(0, 4) === firstName.slice(0, 4)){
                 results.push(player)
-            } else if (searchInput.slice(0, 5) === lastName.slice(0, 5)){
+            } else if (searchInput.length === 5 && searchInput.slice(0, 5) === lastName.slice(0, 5)){
                 results.push(player)
-            } else if (searchInput.slice(0, 5) === firstName.slice(0, 5)){
+            } else if (searchInput.length === 5 && searchInput.slice(0, 5) === firstName.slice(0, 5)){
                 results.push(player)
             }
             return results;
@@ -114,21 +112,22 @@ class Players extends React.Component {
                 </div>
             })
     }
+
         return (
             <div>
                 <h1>Analyze Player Stats</h1>
                     <form onSubmit={(e)=> this.handleSearchClick(e)}>
-                        <input 
+                        <Input 
                             id="searchInput"
                             name="text"
                             type="text"
-                            placeholder="Search for Player"
+                            placeholder="Search Player"
                             onChange={(e)=>this.handleOnChange(e)}
-                            value={this.state.searchTerm}
-                            />
-                        <button name='search' id="searchButton" type="submit" inverted circular link >
+                            value={this.state.searchTerm} 
+                            action={<Button name='search' size="small" color="teal"id="searchButton" type="submit">
                             <Icon name="search"/>
-                        </button>
+                            </Button>}
+                            />
                     </form>
                   <br/>
                   <br/>
