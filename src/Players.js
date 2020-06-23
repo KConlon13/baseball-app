@@ -33,21 +33,7 @@ class Players extends React.Component {
             let lastName = player.name_last.toLowerCase()
             let firstName = player.name_first.toLowerCase()
             let fullName = player.name_display_first_last.toLowerCase()
-            // if (
-            //     searchInput === fullName ||
-            //     // searchInput.slice(0, 3) === lastName.slice(0, 3) ||
-            //     // searchInput.slice(0, 3) === firstName.slice(0, 3) ||
-            //     // searchInput.slice(0, 4) === lastName.slice(0, 4) ||
-            //     // searchInput.slice(0, 4) === firstName.slice(0, 4) ||
-            //     // searchInput.slice(0, 5) === lastName.slice(0, 5) ||
-            //     // searchInput.slice(0, 5) === firstName.slice(0, 5) ||
-            //     searchInput === lastName || 
-            //     searchInput === firstName
-            //     ){
-            //     results.push(player)
-            // }
 
-            // Test 1
             if (searchInput === fullName){
                 results.push(player)
             } else if(searchInput === lastName){
@@ -55,19 +41,19 @@ class Players extends React.Component {
             } else if (searchInput === firstName){
                 results.push(player)
             } 
-            // else if (searchInput.slice(0, 3) === lastName.slice(0, 3)){
-            //     results.push(player)
-            // } else if (searchInput.slice(0, 3) === firstName.slice(0, 3)){
-            //     results.push(player)
-            // } else if (searchInput.slice(0, 4) === lastName.slice(0, 4)){
-            //     results.push(player)
-            // } else if (searchInput.slice(0, 4) === firstName.slice(0, 4)){
-            //     results.push(player)
-            // } else if (searchInput.slice(0, 5) === lastName.slice(0, 5)){
-            //     results.push(player)
-            // } else if (searchInput.slice(0, 5) === firstName.slice(0, 5)){
-            //     results.push(player)
-            // }
+            else if (searchInput.slice(0, 3) === lastName.slice(0, 3)){
+                results.push(player)
+            } else if (searchInput.slice(0, 3) === firstName.slice(0, 3)){
+                results.push(player)
+            } else if (searchInput.slice(0, 4) === lastName.slice(0, 4)){
+                results.push(player)
+            } else if (searchInput.slice(0, 4) === firstName.slice(0, 4)){
+                results.push(player)
+            } else if (searchInput.slice(0, 5) === lastName.slice(0, 5)){
+                results.push(player)
+            } else if (searchInput.slice(0, 5) === firstName.slice(0, 5)){
+                results.push(player)
+            }
             return results;
         })
         this.setState({
@@ -81,11 +67,8 @@ class Players extends React.Component {
         .then(data => data.search_player_all.queryResults.row ? this.setState({playerData: data.search_player_all.queryResults.row}) : null )
     }
 
-    // Next Task is to allow search to find players based on only a few letters
-
     render(){ 
-    let results
-
+    let results;
     if (this.state.searchResults.length === 0 && this.state.searchClicked === true) {
         results = (
             <div class="results transition">
@@ -133,7 +116,7 @@ class Players extends React.Component {
     }
         return (
             <div>
-                <h1>Search Player Stats</h1>
+                <h1>Analyze Player Stats</h1>
                     <form onSubmit={(e)=> this.handleSearchClick(e)}>
                         <input 
                             id="searchInput"
@@ -150,11 +133,6 @@ class Players extends React.Component {
                   <br/>
                   <br/>
                 {results}
-                {/* {this.state.searchResults.length === 0 && this.state.searchClicked === true ? 
-                    <div class="results transition">
-                    <br/>
-                    <div class="message empty"><div class="header">No results found.</div></div>
-                </div> : results } */}
             </div>
         )
     }
