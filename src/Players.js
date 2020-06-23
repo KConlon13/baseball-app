@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Icon, Label, Input, Button } from 'semantic-ui-react'
-// import _ from 'lodash'; 
 
 class Players extends React.Component {
     state={
@@ -98,8 +97,7 @@ class Players extends React.Component {
                 default:
                     posColor="pink"
                     break;
-        }
-        return  <div class="ui centered cards">
+        } return  <div class="ui centered cards">
                     <div class="ui card">
                         <div class="content">
                         <div class="header">{p.name_display_first_last}</div>
@@ -112,7 +110,6 @@ class Players extends React.Component {
                 </div>
             })
     }
-
         return (
             <div>
                 <h1>Analyze Player Stats</h1>
