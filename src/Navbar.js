@@ -73,7 +73,9 @@ class Navbar extends React.Component {
                         {/* </Link> */}
                     </div>
                 </div>
-                <Divider />
+                <div id="navbar-divider">
+                    <Divider />
+                </div>
             </div>
         )
     }

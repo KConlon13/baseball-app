@@ -8,42 +8,57 @@ class PlayerCard extends React.Component {
         modalContainer: [],
     }
 
+    // componentDidUpdate(player_id){
+    //     fetch(`https://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id='mlb'&game_type='R'&player_id=${player_id}`)
+    //     .then(response=>response.json())
+    //     .then(data => 
+    //         (this.setState({modalContainer: data.sport_career_hitting.queryResults.row})))
+    // }
+
     playerIdClickHandler = () => {
         this.setState({
             modalClicked: true,
         })
       
         let player_id = this.props.obj.player_id;
+        // this.componentDidUpdate(player_id)
         fetch(`https://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id='mlb'&game_type='R'&player_id=${player_id}`)
         .then(response=>response.json())
-        .then(data => data !== [] ? 
+        .then(data => 
             (this.setState({modalContainer: data.sport_career_hitting.queryResults.row})) 
-            // console.log("yo", data.sport_career_hitting.queryResults.row)
-            : 
-            console.log("fuck")
         )
     }
 
     render(){
-        console.log(this.state.modalContainer)
-        let statArray;
-        // if (this.state.modalContainer !== []) {
-        //     statArray = this.state.modalContainer.map(s => {
-        //         console.log(s)
-        //     return (
-        //       <Item.Group>
-        //       <Item>
-        //         <Item.Content>
-        //             <Item.Header>{s.name_full}</Item.Header>
-        //             <Item.Extra>Position: {s.position_txt}</Item.Extra>
-        //             <Item.Extra>Bats: {s.bats}</Item.Extra>
-        //             <Item.Extra>Height: {s.height_feet}'{s.height_inches}"</Item.Extra>
-        //             <Item.Extra>Weight: {s.weight}</Item.Extra>
-        //         </Item.Content>
-        //       </Item>
-        //       </Item.Group>
-        //     )})
-        // };
+        // let statArray;
+        let statContent;
+        if (this.state.modalContainer) {
+            // statArray = this.state.modalContainer.map(s => {
+            //     console.log(s)
+            // return (
+            //   <Item.Group>
+            //   <Item>
+            //     <Item.Content>
+            //         <Item.Header>{s.name_full}</Item.Header>
+            //         <Item.Extra>Position: {s.position_txt}</Item.Extra>
+            //         <Item.Extra>Bats: {s.bats}</Item.Extra>
+            //         <Item.Extra>Height: {s.height_feet}'{s.height_inches}"</Item.Extra>
+            //         <Item.Extra>Weight: {s.weight}</Item.Extra>
+            //     </Item.Content>
+            //   </Item>
+            //   </Item.Group>
+            // )})
+            statContent = 
+            <Item.Group>
+              <Item>
+                <Item.Content>
+                    <Item.Header>Career Stats</Item.Header>
+                    <Item.Extra><b>Average: </b>{this.state.modalContainer.avg}</Item.Extra>
+                </Item.Content>
+              </Item>
+              </Item.Group>
+            
+        };
 
         let posColor
         switch(this.props.obj.position){
@@ -90,9 +105,9 @@ class PlayerCard extends React.Component {
                     <Modal trigger={<Button>View Stats</Button>} >
                     {this.state.modalContainer && this.state.modalClicked ? 
                         <Modal.Content>
-                            <Header as="h1">Stats Baby</Header>
-                            <Divider/>
-                            <Modal.Content>{statArray}</Modal.Content> 
+                            <Header as="h1">{this.props.obj.name_display_first_last}</Header>
+                            <div id="player-stat-modal-divider"><Divider/></div>
+                            <Modal.Content>{statContent}</Modal.Content> 
                         </Modal.Content>
                         : null }
                     </Modal> 

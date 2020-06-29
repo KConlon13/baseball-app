@@ -79,7 +79,8 @@ class TeamCard extends React.Component {
                     {this.state.modalContainer && this.state.modalClicked ? 
                         <Modal.Content>
                             <Header as="h1">{this.props.obj.name_display_full} Roster</Header>
-                            <Divider/>
+                            <div id="team-card-modal-divider"><Divider/></div>
+                            {/* <Divider/> */}
                             <Modal.Content>{playerArray}</Modal.Content> 
                         </Modal.Content>
                         : null }

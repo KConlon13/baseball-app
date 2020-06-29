@@ -24,16 +24,22 @@
   margin-top: -50px;
 }
 
-.ui.divider {
+/* Dividers */
+#navbar-divider {
   margin-left: 130px;
   margin-right: 130px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#team-card-modal-divider {
+  margin-left: 0px;
+  margin-right: 0px;
 }
+
+#player-stat-modal-divider {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+/* End Dividers  */
 
 .ui.secondary.menu {
   margin-left: 150px;
