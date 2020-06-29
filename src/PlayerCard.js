@@ -30,30 +30,28 @@ class PlayerCard extends React.Component {
     }
 
     render(){
-        // let statArray;
         let statContent;
         if (this.state.modalContainer) {
-            // statArray = this.state.modalContainer.map(s => {
-            //     console.log(s)
-            // return (
-            //   <Item.Group>
-            //   <Item>
-            //     <Item.Content>
-            //         <Item.Header>{s.name_full}</Item.Header>
-            //         <Item.Extra>Position: {s.position_txt}</Item.Extra>
-            //         <Item.Extra>Bats: {s.bats}</Item.Extra>
-            //         <Item.Extra>Height: {s.height_feet}'{s.height_inches}"</Item.Extra>
-            //         <Item.Extra>Weight: {s.weight}</Item.Extra>
-            //     </Item.Content>
-            //   </Item>
-            //   </Item.Group>
-            // )})
             statContent = 
             <Item.Group>
               <Item>
                 <Item.Content>
                     <Item.Header>Career Stats</Item.Header>
-                    <Item.Extra><b>Average: </b>{this.state.modalContainer.avg}</Item.Extra>
+                    <Item.Extra><b>Games Played: </b>{this.state.modalContainer.g}</Item.Extra>
+                    <Item.Extra><b>At Bats: </b>{this.state.modalContainer.ab}</Item.Extra>
+                    <Item.Extra><b>Runs: </b>{this.state.modalContainer.r}</Item.Extra>
+                    <Item.Extra><b>Hits </b>{this.state.modalContainer.h}</Item.Extra>
+                    <Item.Extra><b>Doubles: </b>{this.state.modalContainer.d}</Item.Extra>
+                    <Item.Extra><b>Triples: </b>{this.state.modalContainer.t}</Item.Extra>
+                    <Item.Extra><b>Home Runs: </b>{this.state.modalContainer.hr}</Item.Extra>
+                    <Item.Extra><b>RBI: </b>{this.state.modalContainer.rbi}</Item.Extra>
+                    <Item.Extra><b>Walks: </b>{this.state.modalContainer.bb}</Item.Extra>
+                    <Item.Extra><b>Strike Outs: </b>{this.state.modalContainer.so}</Item.Extra>
+                    <Item.Extra><b>Stolen Bases: </b>{this.state.modalContainer.sb}</Item.Extra>
+                    <Item.Extra><b>AVG: </b>{this.state.modalContainer.avg}</Item.Extra>
+                    <Item.Extra><b>OBP: </b>{this.state.modalContainer.obp}</Item.Extra>
+                    <Item.Extra><b>SLG: </b>{this.state.modalContainer.slg}</Item.Extra>
+                    <Item.Extra><b>OPS: </b>{this.state.modalContainer.ops}</Item.Extra>
                 </Item.Content>
               </Item>
               </Item.Group>
