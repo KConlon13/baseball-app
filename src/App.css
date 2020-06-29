@@ -15,7 +15,7 @@
 }
 
 .column {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 .ui.buttons.button-group {
@@ -48,4 +48,8 @@
 .ui.card, .ui.cards>.card {
   width: 450px;
   margin-top: 30px;
+}
+
+.view-player-stats-button {
+  margin-top: 7px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Icon, Label, Input, Button } from 'semantic-ui-react'
+import { Icon, Label, Input, Button, Modal, Header, Divider } from 'semantic-ui-react';
+import PlayerCard from "./PlayerCard";
 
 class Players extends React.Component {
     state={
@@ -74,46 +75,13 @@ class Players extends React.Component {
             </div>
     )} else {
         results = this.state.searchResults.map(p => {
-            let posColor
-            switch(p.position){
-                case "P":
-                    posColor="blue"
-                    break;
-                case "1B":
-                    posColor="red"
-                    break;
-                case "2B":
-                    posColor="teal"
-                    break;
-                case "SS":
-                    posColor="green"
-                    break;
-                case "3B":
-                    posColor="olive"
-                    break;
-                case "OF":
-                    posColor="purple"
-                    break;
-                default:
-                    posColor="pink"
-                    break;
-        } return  <div class="ui centered cards">
-                    <div class="ui card">
-                        <div class="content">
-                        <div class="header">{p.name_display_first_last}</div>
-                        <div class="meta">{p.team_full}</div>
-                            <div class="description">
-                                <Label circular color={posColor}>{p.position}</Label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                return <PlayerCard obj={p} key={p.id}/>
             })
     }
         return (
             <div>
                 <h1>Analyze Player Stats</h1>
-                    <form onSubmit={(e)=> this.handleSearchClick(e)}>
+                    <form onSubmit={(e)=> this.handleSearchClick(e)} autoComplete="off">
                         <Input 
                             id="searchInput"
                             name="text"
