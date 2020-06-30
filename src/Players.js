@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Icon, Label, Input, Button, Modal, Header, Divider } from 'semantic-ui-react';
+import { Icon, Input, Button } from 'semantic-ui-react';
 import PlayerCard from "./PlayerCard";
 
 class Players extends React.Component {
