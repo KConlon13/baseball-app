@@ -66,3 +66,12 @@
   grid-gap: 10px;
   padding: 10px;
 }
+
+h4.ui.header {
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+}
+
+h1.ui.header {
+  margin-bottom: 10px;
+}

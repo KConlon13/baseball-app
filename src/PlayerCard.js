@@ -127,6 +127,9 @@ class PlayerCard extends React.Component {
                     {this.state.modalCareerContainer && this.state.modalClicked ? 
                         <Modal.Content>
                             <Header as="h1">{this.props.obj.name_display_first_last}</Header>
+                            <div id="playercard-modal-subheader">
+                                <Header as="h4">{this.props.obj.team_full} - {this.props.obj.position}</Header>
+                            </div>
                             <div id="player-stat-modal-divider"><Divider/></div>
                             <Modal.Content>{statContent}</Modal.Content> 
                         </Modal.Content>
