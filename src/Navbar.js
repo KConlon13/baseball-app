@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class Navbar extends React.Component {
     state={
-        homeActive: true,
+        homeActive: false,
         playersActive: false,
         scoresActive: false,
         newsActive: false,
@@ -45,15 +45,19 @@ class Navbar extends React.Component {
     }
 
     render(){
-
         return(
             <div>
                 <div class="ui secondary menu">
                     <Link to="/">
                         {this.state.homeActive === true ? 
                         <li className="active item" onClick={() => this.homeItemHandler()}>
-                            Home
+                        Home
                         </li> : 
+                        window.location.pathname === "/" ? 
+                        <li class="active item" onClick={() => this.homeItemHandler()}>
+                        Home
+                        </li> 
+                        :
                         <li className="item" onClick={() => this.homeItemHandler()}>
                         Home
                         </li> }
@@ -61,8 +65,13 @@ class Navbar extends React.Component {
                     <Link to="/players">
                         {this.state.playersActive === true ? 
                         <li class="active item" onClick={() => this.playersItemHandler()}>
-                            Players
+                        Players
                         </li> : 
+                        window.location.pathname === "/players" ? 
+                        <li class="active item" onClick={() => this.playersItemHandler()}>
+                        Players
+                        </li> 
+                        :
                         <li class="item" onClick={() => this.playersItemHandler()}>
                         Players
                         </li> }
@@ -70,8 +79,13 @@ class Navbar extends React.Component {
                     <Link to="/scores">
                         {this.state.scoresActive === true ? 
                         <li class="active item" onClick={() => this.scoresItemHandler()}>
-                            Scores
+                        Scores
                         </li> : 
+                        window.location.pathname === "/scores" ? 
+                        <li class="active item" onClick={() => this.scoresItemHandler()}>
+                        Scores
+                        </li> 
+                        :
                         <li class="item" onClick={() => this.scoresItemHandler()}>
                         Scores
                         </li> }
@@ -79,8 +93,13 @@ class Navbar extends React.Component {
                     <Link to="/news">
                         {this.state.newsActive === true ? 
                         <li class="active item" onClick={() => this.newsItemHandler()}>
-                            News
+                        News
                         </li> : 
+                        window.location.pathname === "/news" ? 
+                        <li class="active item" onClick={() => this.newsItemHandler()}>
+                        News
+                        </li> 
+                        :
                         <li class="item" onClick={() => this.newsItemHandler()}>
                         News
                         </li> }
