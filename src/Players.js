@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Icon, Input, Button } from 'semantic-ui-react';
 import PlayerCard from "./PlayerCard";
+import PitcherCard from "./PitcherCard";
 
 class Players extends React.Component {
     state={
@@ -75,7 +76,11 @@ class Players extends React.Component {
             </div>
     )} else {
         results = this.state.searchResults.map(p => {
-                return <PlayerCard obj={p} key={p.id}/>
+                if (p.position === "P") {
+                    return <PitcherCard obj={p} key={p.id}/>
+                } else {
+                    return <PlayerCard obj={p} key={p.id}/>
+                }
             })
     }
         return (

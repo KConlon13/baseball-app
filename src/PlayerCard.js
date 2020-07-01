@@ -35,7 +35,7 @@ class PlayerCard extends React.Component {
             <Item.Group>
               <Item>
                 <Item.Content>
-                    <Item.Header>2019 Stats</Item.Header>
+                    <Item.Header>2019 Batting Stats</Item.Header>
                     <div class="player-card-modal-stat-grid">
                         <Item.Extra><b>Games Played: </b>{this.state.modalLastYearContainer.g}</Item.Extra> 
                         <Item.Extra><b>Hits </b>{this.state.modalLastYearContainer.h}</Item.Extra> 
@@ -58,7 +58,7 @@ class PlayerCard extends React.Component {
 
               <Item>
                 <Item.Content>
-                    <Item.Header>Career Stats</Item.Header>
+                    <Item.Header>Career Batting Stats</Item.Header>
                     <div class="player-card-modal-stat-grid">
                         <Item.Extra><b>Games Played: </b>{this.state.modalCareerContainer.g}</Item.Extra> 
                         <Item.Extra><b>Hits </b>{this.state.modalCareerContainer.h}</Item.Extra> 
@@ -84,7 +84,7 @@ class PlayerCard extends React.Component {
             <Item.Group>
               <Item>
                 <Item.Content>
-                    <Item.Header>Career Stats</Item.Header>
+                    <Item.Header>Career Batting Stats</Item.Header>
                     <div class="player-card-modal-stat-grid">
                         <Item.Extra><b>Games Played: </b>{this.state.modalCareerContainer.g}</Item.Extra> 
                         <Item.Extra><b>Hits </b>{this.state.modalCareerContainer.h}</Item.Extra> 
@@ -110,7 +110,7 @@ class PlayerCard extends React.Component {
             <Item.Group>
               <Item>
                 <Item.Content>
-                    <Item.Header>2019 Stats</Item.Header>
+                    <Item.Header>2019 Batting Stats</Item.Header>
                     <div class="player-card-modal-stat-grid">
                         <Item.Extra><b>Games Played: </b>{this.state.modalLastYearContainer.g}</Item.Extra> 
                         <Item.Extra><b>Hits </b>{this.state.modalLastYearContainer.h}</Item.Extra> 
