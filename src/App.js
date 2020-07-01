@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import { } from 'semantic-ui-react'
 import Players from "./Players";
 import Scores from "./Scores";
+import News from "./News";
 import Navbar from "./Navbar";
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
                 <Route exact path="/" component={TeamHomePage}/>
                 <Route path="/players" component={Players}/>
                 <Route path="/scores" component={Scores}/>
+                <Route path="/news" component={News}/>
             </Switch>
         </Router>
       </div>

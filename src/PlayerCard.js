@@ -209,9 +209,3 @@ class PlayerCard extends React.Component {
 }
 
 export default PlayerCard;
-
-// Next Step!
-// Create separate player card component based on pitcher stats
-// So in Players component, create a conditional based on their position
-// If they are a position player- pass their data to PlayerCard (as it is now) and render that card
-// If they are a pitcher, pass their data to a new component called PitcherCard and render that card with new fetches for pitching data 

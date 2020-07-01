@@ -8,6 +8,7 @@ class Navbar extends React.Component {
         homeActive: true,
         playersActive: false,
         scoresActive: false,
+        newsActive: false,
     }
 
     homeItemHandler = () => {
@@ -15,6 +16,7 @@ class Navbar extends React.Component {
             homeActive: true,
             playersActive: false,
             scoresActive: false,
+            newsActive: false,
         })
     }
     playersItemHandler = () => {
@@ -22,6 +24,7 @@ class Navbar extends React.Component {
             homeActive: false,
             playersActive: true,
             scoresActive: false,
+            newsActive: false,
         })
     }
     scoresItemHandler = () => {
@@ -29,6 +32,15 @@ class Navbar extends React.Component {
             homeActive: false,
             playersActive: false,
             scoresActive: true,
+            newsActive: false,
+        })
+    }
+    newsItemHandler = () => {
+        this.setState({
+            homeActive: false,
+            playersActive: false,
+            scoresActive: false,
+            newsActive: true,
         })
     }
 
@@ -62,6 +74,15 @@ class Navbar extends React.Component {
                         </li> : 
                         <li class="item" onClick={() => this.scoresItemHandler()}>
                         Scores
+                        </li> }
+                    </Link>
+                    <Link to="/news">
+                        {this.state.newsActive === true ? 
+                        <li class="active item" onClick={() => this.newsItemHandler()}>
+                            News
+                        </li> : 
+                        <li class="item" onClick={() => this.newsItemHandler()}>
+                        News
                         </li> }
                     </Link>
 

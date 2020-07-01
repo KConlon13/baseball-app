@@ -27,7 +27,7 @@ class PitcherCard extends React.Component {
             (this.setState({modalLastYearContainer: data.sport_pitching_tm.queryResults.row}))
         ) 
     }
-
+    // Possible feature: Add WAR stat to pitcher stats below, which will need to be calculated
     render(){
         let statContent;
         if (this.state.modalCareerContainer && this.state.modalLastYearContainer) {
