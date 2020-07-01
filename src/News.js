@@ -4,6 +4,8 @@ import './App.css';
 
 class News extends React.Component {
 
+    // This component should have a navbar at the top to allow users to view 
+    // Injuries, Daily Game Schedules, & Transactions
 
     render(){
         return(
