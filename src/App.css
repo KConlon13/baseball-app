@@ -75,3 +75,21 @@ h4.ui.header {
 h1.ui.header {
   margin-bottom: 10px;
 }
+
+#countdown-title {
+  margin-top: 35px;
+  margin-bottom: 2px;
+}
+
+#countdown-subtitle {
+  margin-top: 6px;
+  margin-bottom: 20px;
+  font-size: small;
+  font-weight: 600;
+}
+
+#progress-bar {
+  margin-left: 400px;
+  margin-right: 400px;
+  margin-top: 20px;
+}

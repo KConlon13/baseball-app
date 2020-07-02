@@ -45,6 +45,7 @@ class Navbar extends React.Component {
     }
 
     render(){
+
         return(
             <div>
                 <div class="ui secondary menu">
@@ -90,6 +91,7 @@ class Navbar extends React.Component {
                         Scores
                         </li> }
                     </Link>
+
                     <Link to="/news">
                         {this.state.newsActive === true ? 
                         <li class="active item" onClick={() => this.newsItemHandler()}>
