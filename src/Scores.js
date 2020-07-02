@@ -8,7 +8,7 @@ class Scores extends React.Component {
     render(){
         return(
             <div>
-               <h1>Scores Page</h1>
+               <h2 id="scores-title">Baseball Ain't Back Yet Baby</h2>
             </div>
         )
     }

@@ -85,7 +85,7 @@ class Players extends React.Component {
     }
         return (
             <div>
-                <h1>Analyze Player Stats</h1>
+                <h2 id="player-page-title">Analyze Player Stats</h2>
                     <form onSubmit={(e)=> this.handleSearchClick(e)} autoComplete="off">
                         <Input 
                             id="searchInput"
