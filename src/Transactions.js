@@ -61,3 +61,6 @@ class Transactions extends React.Component {
 }
 
 export default Transactions;
+
+// Next BIG feature-- create something that limits the amount of news info on each side by only like 30 items at a time
+// This will help keep the inital start date for the fetch as the beginning of spring training AND to keep the page fast & dynamic once the season starts
