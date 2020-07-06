@@ -108,3 +108,14 @@ h1.ui.header {
   margin-left: 100px;
   margin-right: 100px;
 }
+
+#news-grid-right {
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: rgba(128, 128, 128, 0.561);
+}
+
+.news-segment-headers {
+  align-items: center;
+  padding-bottom: 20px;
+}

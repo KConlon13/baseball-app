@@ -1,11 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Progress, Loader, Grid, Menu, Segment, Divider } from 'semantic-ui-react'
+import { Progress, Loader, Grid, Segment } from 'semantic-ui-react'
 import Transactions from "./Transactions";
 import Injuries from "./Injuries";
-
-// This component should have a navbar at the top to allow users to view 
-// Injuries & Transactions
 
 class News extends React.Component {
     state={
@@ -51,12 +48,11 @@ class News extends React.Component {
 
                 <div id="news-segment">
                     <Segment>
-                        <Grid columns={2} relaxed='very'>
+                        <Grid columns={3}>
                             <Grid.Column width={8}>
                                 <Transactions/>
                             </Grid.Column>
-                            <Divider vertical />
-                            <Grid.Column width={8}>
+                            <Grid.Column width={8} id="news-grid-right" >
                                 <Injuries/>
                             </Grid.Column>
                         </Grid>

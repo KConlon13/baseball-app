@@ -1,21 +1,20 @@
 import React from 'react';
 import './App.css';
-import { Tab, Feed, Icon } from 'semantic-ui-react'
-
-// This component should have a navbar at the top to allow users to view 
-// Injuries & Transactions
+import { Feed, Icon, Header } from 'semantic-ui-react'
 
 class Transactions extends React.Component {
-    // state={
-    // }
-
-
-
     render(){
-
         return(
             <div>
-                <h3>Recent Transactions</h3>
+                <Header as='h2' textAlign="center">
+                    <div class="news-segment-headers">
+                        <Icon name='exchange' />
+                        <Header.Content>
+                        Recent Transactions
+                        </Header.Content>
+                    </div>
+                </Header>
+
                 <Feed>
                     <Feed.Event>
                         <Feed.Content>
