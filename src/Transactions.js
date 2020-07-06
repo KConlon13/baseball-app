@@ -7,28 +7,20 @@ class Transactions extends React.Component {
         transactionData: [],
     }
 
-    componentDidMount(){
-        let now = new Date();
-        let nowDate = now.toLocaleDateString().split("/")
-        if (nowDate[1].length === 1) {
-            nowDate[1] = "0"+nowDate[1]
-        } 
-        if (nowDate[0].length === 1) {
-            nowDate[0] = "0"+nowDate[0]
-        }
-        let currentDate = nowDate[2] + nowDate[0] + nowDate[1]
-        // console.log(currentDate)
-
-        // Use today's date as the end range of the fetch
-        fetch(`https://lookup-service-prod.mlb.com/json/named.transaction_all.bam?sport_code='mlb'&start_date='20200701'&end_date=${currentDate}`)
-        .then(resp=>resp.json())
-        .then(data => (
-            this.setState({transactionData: data.transaction_all.queryResults.row}), 
-            console.log(this.state.transactionData)
-        ))
-    }
-
     render(){
+        const transactionList = this.props.newsData.reverse().map(item => {
+            if (item.type !== "Status Change") {
+                return <Feed.Event>
+                <Feed.Content>
+                    <Feed.Summary>
+                    <Feed.User>{item.note}</Feed.User>
+                    <Feed.Date>{item.resolution_date}</Feed.Date>
+                    </Feed.Summary>
+                </Feed.Content>
+            </Feed.Event>
+            }
+        })
+
         return(
             <div>
                 <Header as='h2' textAlign="center">
@@ -41,16 +33,9 @@ class Transactions extends React.Component {
                 </Header>
 
                 <Feed>
-                    <Feed.Event>
-                        <Feed.Content>
-                            <Feed.Summary>
-                            <Feed.User>Elliot Fu</Feed.User> added you as a friend
-                            <Feed.Date>1 Hour Ago</Feed.Date>
-                            </Feed.Summary>
-                        </Feed.Content>
-                    </Feed.Event>
-
+                    {transactionList}
                 </Feed>
+                {/* {transactionList} */}
             </div>
         )
     }

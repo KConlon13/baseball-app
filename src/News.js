@@ -7,6 +7,7 @@ import Injuries from "./Injuries";
 class News extends React.Component {
     state={
         countdownDayCalc: "",
+        newsData: [],
     }
 
     openingDayCountdown = () => {
@@ -33,6 +34,27 @@ class News extends React.Component {
         return dayCalc;
     }
 
+    componentDidMount(){
+        let now = new Date();
+        let nowDate = now.toLocaleDateString().split("/")
+        if (nowDate[1].length === 1) {
+            nowDate[1] = "0"+nowDate[1]
+        } 
+        if (nowDate[0].length === 1) {
+            nowDate[0] = "0"+nowDate[0]
+        }
+        let currentDate = nowDate[2] + nowDate[0] + nowDate[1]
+        // console.log(currentDate)
+
+        // Use today's date as the end range of the fetch
+        fetch(`https://lookup-service-prod.mlb.com/json/named.transaction_all.bam?sport_code='mlb'&start_date='20200701'&end_date=${currentDate}`)
+        .then(resp=>resp.json())
+        .then(data => (
+            this.setState({newsData: data.transaction_all.queryResults.row}), 
+            console.log(this.state.newsData)
+        ))
+    }
+
     render(){
         // Returning value for Progress bar & invoking countdown clock function
         let currentDistance = this.openingDayCountdown()
@@ -50,10 +72,10 @@ class News extends React.Component {
                     <Segment>
                         <Grid columns={3}>
                             <Grid.Column width={8}>
-                                <Transactions/>
+                                <Transactions newsData={this.state.newsData} />
                             </Grid.Column>
                             <Grid.Column width={8} id="news-grid-right" >
-                                <Injuries/>
+                                <Injuries newsData={this.state.newsData} />
                             </Grid.Column>
                         </Grid>
                     </Segment>
