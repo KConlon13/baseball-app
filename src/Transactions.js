@@ -7,17 +7,38 @@ class Transactions extends React.Component {
         transactionData: [],
     }
 
+    
+    dateSubtractor=(transDate)=>{
+        let now = new Date()
+        let itemDate = transDate.split("-")[0] + "-" + transDate.split("-")[1] + "-" + transDate.split("-")[2].slice(0,2)
+        let newDate = new Date(itemDate)
+        let distance = newDate - now;
+        let days = Math.floor((distance / (1000 * 60 * 60 * 24)))+1;
+        let result;
+        if (Math.abs(days) === 0){
+            result = "Today"
+        } else if (Math.abs(days) === 1){
+            result = "1 day ago";
+        } else {
+            result = Math.abs(days)+" days ago"
+        }
+        return result;
+    }
+    
     render(){
         const transactionList = this.props.newsData.reverse().map(item => {
+            let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type !== "Status Change") {
                 return <Feed.Event>
                 <Feed.Content>
-                    <Feed.Summary>
+                <Feed.Summary>
                     <Feed.User>{item.note}</Feed.User>
-                    <Feed.Date>{item.resolution_date}</Feed.Date>
+                    <Feed.Date>{finalDate}</Feed.Date>
                     </Feed.Summary>
                 </Feed.Content>
             </Feed.Event>
+            } else {
+                return null;
             }
         })
 
@@ -31,11 +52,9 @@ class Transactions extends React.Component {
                         </Header.Content>
                     </div>
                 </Header>
-
                 <Feed>
                     {transactionList}
                 </Feed>
-                {/* {transactionList} */}
             </div>
         )
     }

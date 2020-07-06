@@ -118,6 +118,7 @@ h1.ui.header {
 .news-segment-headers {
   align-items: center;
   padding-bottom: 20px;
+  padding-top: 10px;
 }
 
 .ui.feed>.event>.content .summary {
@@ -127,4 +128,8 @@ h1.ui.header {
   font-size: 1em;
   font-weight: 700;
   color: rgba(0,0,0,.87);
+}
+
+.news-feed-note {
+  padding-bottom: 0px;
 }
