@@ -102,3 +102,9 @@ h1.ui.header {
 #scores-title {
   margin-top: 30px;
 }
+
+#news-segment {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+}

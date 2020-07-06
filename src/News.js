@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Progress, Loader } from 'semantic-ui-react'
+import { Progress, Loader, Grid, Menu, Segment, Divider } from 'semantic-ui-react'
+import Transactions from "./Transactions";
+import Injuries from "./Injuries";
 
 // This component should have a navbar at the top to allow users to view 
 // Injuries & Transactions
@@ -36,16 +38,30 @@ class News extends React.Component {
 
     render(){
         // Returning value for Progress bar & invoking countdown clock function
-        let fuck = this.openingDayCountdown()
+        let currentDistance = this.openingDayCountdown()
 
         return(
             <div>
                 <h2 id="countdown-title">Countdown to Opening Day</h2>
                 <h5 id="countdown-subtitle">(From "Spring" Training)</h5>
                 <div id="progress-bar">
-                    <Progress indicating value={fuck + "days left"} percent={4*(25 - fuck)}/>
+                    <Progress indicating percent={4*(25 - currentDistance)}/>
                 </div>
                 <h4 id="demo"><Loader active inline content="Summoning the Baseball Gods..."/></h4>
+
+                <div id="news-segment">
+                    <Segment>
+                        <Grid columns={2} relaxed='very'>
+                            <Grid.Column width={8}>
+                                <Transactions/>
+                            </Grid.Column>
+                            <Divider vertical />
+                            <Grid.Column width={8}>
+                                <Injuries/>
+                            </Grid.Column>
+                        </Grid>
+                    </Segment>
+                </div>
             </div>
         )
     }
