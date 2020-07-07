@@ -88,14 +88,14 @@ class Injuries extends React.Component {
                     {injuryList}
                 </Feed>
                 {this.state.expanded ? (
-                    <Button animated='vertical' inverted color="purple" onClick={this.showMore}>
+                    <Button animated='vertical' inverted color="blue" onClick={this.showMore}>
                     <Button.Content visible>Show less</Button.Content>
                     <Button.Content hidden>
                         <Icon name='arrow circle up' />
                     </Button.Content>
                     </Button>
                 ):(
-                    <Button animated='vertical' inverted color="purple" onClick={this.showMore}>
+                    <Button animated='vertical' inverted color="blue" onClick={this.showMore}>
                     <Button.Content visible>Show more</Button.Content>
                     <Button.Content hidden>
                         <Icon name='arrow circle down' />

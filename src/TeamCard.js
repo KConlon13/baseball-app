@@ -14,7 +14,7 @@ class TeamCard extends React.Component {
         })
     
         let team_id = this.props.obj.team_id;
-        fetch(`http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=${team_id}`)
+        fetch(`https://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=${team_id}`)
         .then(response=>response.json())
         .then(data => data !== [] ? (this.setState({modalContainer: data.roster_40.queryResults.row})) : null) 
       }
