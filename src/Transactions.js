@@ -39,9 +39,10 @@ class Transactions extends React.Component {
     }
     
     render(){
+        const reversedData = this.props.newsData.reverse()
         let transactionList;
         if (this.state.expanded) {
-            transactionList = this.props.newsData.reverse().map(item => {
+            transactionList = reversedData.map(item => {
             let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type !== "Status Change") {
                 return <Feed.Event>
@@ -57,7 +58,7 @@ class Transactions extends React.Component {
             }
         })
         } else {
-            transactionList = this.props.newsData.reverse().slice(0, 20).map(item => {
+            transactionList = reversedData.slice(0, 20).map(item => {
                 let finalDate = this.dateSubtractor(item.trans_date)
                 if (item.type !== "Status Change") {
                     return <Feed.Event>

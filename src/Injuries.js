@@ -38,10 +38,12 @@ class Injuries extends React.Component {
         return result;
     }
 
+    
     render(){
+        const reversedData = this.props.newsData.reverse()
         let injuryList;
         if (this.state.expanded) {
-            injuryList = this.props.newsData.reverse().map(item => {
+            injuryList = reversedData.map(item => {
             let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type === "Status Change") {
                 return <Feed.Event>
@@ -57,7 +59,7 @@ class Injuries extends React.Component {
             }
         })
         } else {
-            injuryList = this.props.newsData.reverse().slice(0, 50).map(item => {
+            injuryList = reversedData.slice(0, 50).map(item => {
                 let finalDate = this.dateSubtractor(item.trans_date)
                 if (item.type === "Status Change") {
                     return <Feed.Event>
