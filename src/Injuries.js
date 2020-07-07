@@ -2,25 +2,26 @@ import React from 'react';
 import './App.css';
 import { Feed, Icon, Header, Button } from 'semantic-ui-react'
 
+
 class Injuries extends React.Component {
     state={
         injuryData: [],
         itemsLimited: true,
         expanded: false,
     }
-
+    
     showMore = () => {
         this.state.itemsLimited === true ? (
-        this.setState({
-            itemsLimited: false,
-            expanded: true,
-        })) : (
-        this.setState({
-            itemsLimited: true,
-            expanded: false,
-        }))
-    }
-
+            this.setState({
+                itemsLimited: false,
+                expanded: true,
+            })) : (
+                this.setState({
+                    itemsLimited: true,
+                    expanded: false,
+                }))
+            }
+            
     dateSubtractor=(transDate)=>{
         let now = new Date()
         let itemDate = transDate.split("-")[0] + "-" + transDate.split("-")[1] + "-" + transDate.split("-")[2].slice(0,2)
@@ -37,16 +38,15 @@ class Injuries extends React.Component {
         }
         return result;
     }
-
-    
+            
+            
     render(){
-        const reversedData = this.props.newsData.reverse()
         let injuryList;
         if (this.state.expanded) {
-            injuryList = reversedData.map(item => {
+            injuryList = this.props.newsData.map(item => {
             let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type === "Status Change") {
-                return <Feed.Event>
+                return <Feed.Event key={item.transaction_id}>
                 <Feed.Content>
                 <Feed.Summary>
                     <Feed.User onClick={()=>window.open(`https://www.google.com/search?q=${item.note}`, '_blank')}>{item.note}</Feed.User>
@@ -59,10 +59,10 @@ class Injuries extends React.Component {
             }
         })
         } else {
-            injuryList = reversedData.slice(0, 50).map(item => {
+            injuryList = this.props.newsData.slice(0, 30).map(item => {
                 let finalDate = this.dateSubtractor(item.trans_date)
                 if (item.type === "Status Change") {
-                    return <Feed.Event>
+                    return <Feed.Event key={item.transaction_id}>
                     <Feed.Content>
                     <Feed.Summary>
                         <Feed.User onClick={()=>window.open(`https://www.google.com/search?q=${item.note}`, '_blank')}>{item.note}</Feed.User>

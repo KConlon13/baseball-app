@@ -39,13 +39,12 @@ class Transactions extends React.Component {
     }
     
     render(){
-        const reversedData = this.props.newsData.reverse()
         let transactionList;
         if (this.state.expanded) {
-            transactionList = reversedData.map(item => {
+            transactionList = this.props.newsData.map(item => {
             let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type !== "Status Change") {
-                return <Feed.Event>
+                return <Feed.Event key={item.transaction_id}>
                 <Feed.Content>
                 <Feed.Summary>
                     <Feed.User onClick={()=>window.open(`https://www.google.com/search?q=${item.note}`, '_blank')}>{item.note}</Feed.User>
@@ -58,10 +57,10 @@ class Transactions extends React.Component {
             }
         })
         } else {
-            transactionList = reversedData.slice(0, 20).map(item => {
+            transactionList = this.props.newsData.slice(0, 20).map(item => {
                 let finalDate = this.dateSubtractor(item.trans_date)
                 if (item.type !== "Status Change") {
-                    return <Feed.Event>
+                    return <Feed.Event key={item.transaction_id}>
                     <Feed.Content>
                     <Feed.Summary>
                         <Feed.User onClick={()=>window.open(`https://www.google.com/search?q=${item.note}`, '_blank')}>{item.note}</Feed.User>

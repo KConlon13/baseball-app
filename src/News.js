@@ -50,7 +50,7 @@ class News extends React.Component {
         fetch(`https://lookup-service-prod.mlb.com/json/named.transaction_all.bam?sport_code='mlb'&start_date='20200701'&end_date=${currentDate}`)
         .then(resp=>resp.json())
         .then(data => (
-            this.setState({newsData: data.transaction_all.queryResults.row})
+            this.setState({newsData: data.transaction_all.queryResults.row.reverse()})
         ))
     }
 
