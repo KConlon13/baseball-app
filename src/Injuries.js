@@ -1,10 +1,24 @@
 import React from 'react';
 import './App.css';
-import { Feed, Icon, Header } from 'semantic-ui-react'
+import { Feed, Icon, Header, Button } from 'semantic-ui-react'
 
 class Injuries extends React.Component {
     state={
         injuryData: [],
+        itemsLimited: true,
+        expanded: false,
+    }
+
+    showMore = () => {
+        this.state.itemsLimited === true ? (
+        this.setState({
+            itemsLimited: false,
+            expanded: true,
+        })) : (
+        this.setState({
+            itemsLimited: true,
+            expanded: false,
+        }))
     }
 
     dateSubtractor=(transDate)=>{
@@ -25,12 +39,14 @@ class Injuries extends React.Component {
     }
 
     render(){
-        const injuryList = this.props.newsData.reverse().map(item => {
+        let injuryList;
+        if (this.state.expanded) {
+            injuryList = this.props.newsData.reverse().map(item => {
             let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type === "Status Change") {
                 return <Feed.Event>
                 <Feed.Content>
-                    <Feed.Summary>
+                <Feed.Summary>
                     <Feed.User>{item.note}</Feed.User>
                     <Feed.Date>{finalDate}</Feed.Date>
                     </Feed.Summary>
@@ -40,6 +56,23 @@ class Injuries extends React.Component {
                 return null;
             }
         })
+        } else {
+            injuryList = this.props.newsData.reverse().slice(0, 50).map(item => {
+                let finalDate = this.dateSubtractor(item.trans_date)
+                if (item.type === "Status Change") {
+                    return <Feed.Event>
+                    <Feed.Content>
+                    <Feed.Summary>
+                        <Feed.User>{item.note}</Feed.User>
+                        <Feed.Date>{finalDate}</Feed.Date>
+                        </Feed.Summary>
+                    </Feed.Content>
+                </Feed.Event>
+                } else {
+                    return null;
+                }
+            })
+        }
 
         return(
             <div>
@@ -54,6 +87,21 @@ class Injuries extends React.Component {
                 <Feed>
                     {injuryList}
                 </Feed>
+                {this.state.expanded ? (
+                    <Button animated='vertical' inverted color="purple" onClick={this.showMore}>
+                    <Button.Content visible>Show less</Button.Content>
+                    <Button.Content hidden>
+                        <Icon name='arrow circle up' />
+                    </Button.Content>
+                    </Button>
+                ):(
+                    <Button animated='vertical' inverted color="purple" onClick={this.showMore}>
+                    <Button.Content visible>Show more</Button.Content>
+                    <Button.Content hidden>
+                        <Icon name='arrow circle down' />
+                    </Button.Content>
+                    </Button>
+                )}
             </div>
         )
     }

@@ -1,13 +1,26 @@
 import React from 'react';
 import './App.css';
-import { Feed, Icon, Header } from 'semantic-ui-react'
+import { Feed, Icon, Header, Button } from 'semantic-ui-react'
 
 class Transactions extends React.Component {
     state={
         transactionData: [],
+        itemsLimited: true,
+        expanded: false,
     }
 
-    
+    showMore = () => {
+        this.state.itemsLimited === true ? (
+        this.setState({
+            itemsLimited: false,
+            expanded: true,
+        })) : (
+        this.setState({
+            itemsLimited: true,
+            expanded: false,
+        }))
+    }
+
     dateSubtractor=(transDate)=>{
         let now = new Date()
         let itemDate = transDate.split("-")[0] + "-" + transDate.split("-")[1] + "-" + transDate.split("-")[2].slice(0,2)
@@ -26,7 +39,9 @@ class Transactions extends React.Component {
     }
     
     render(){
-        const transactionList = this.props.newsData.reverse().map(item => {
+        let transactionList;
+        if (this.state.expanded) {
+            transactionList = this.props.newsData.reverse().map(item => {
             let finalDate = this.dateSubtractor(item.trans_date)
             if (item.type !== "Status Change") {
                 return <Feed.Event>
@@ -41,6 +56,23 @@ class Transactions extends React.Component {
                 return null;
             }
         })
+        } else {
+            transactionList = this.props.newsData.reverse().slice(0, 20).map(item => {
+                let finalDate = this.dateSubtractor(item.trans_date)
+                if (item.type !== "Status Change") {
+                    return <Feed.Event>
+                    <Feed.Content>
+                    <Feed.Summary>
+                        <Feed.User>{item.note}</Feed.User>
+                        <Feed.Date>{finalDate}</Feed.Date>
+                        </Feed.Summary>
+                    </Feed.Content>
+                </Feed.Event>
+                } else {
+                    return null;
+                }
+            })
+        }
 
         return(
             <div>
@@ -55,6 +87,21 @@ class Transactions extends React.Component {
                 <Feed>
                     {transactionList}
                 </Feed>
+                {this.state.expanded ? (
+                    <Button animated='vertical' inverted color="purple" onClick={this.showMore}>
+                    <Button.Content visible>Show less</Button.Content>
+                    <Button.Content hidden>
+                        <Icon name='arrow circle up' />
+                    </Button.Content>
+                    </Button>
+                ):(
+                    <Button animated='vertical' inverted color="purple" onClick={this.showMore}>
+                    <Button.Content visible>Show more</Button.Content>
+                    <Button.Content hidden>
+                        <Icon name='arrow circle down' />
+                    </Button.Content>
+                    </Button>
+                )}
             </div>
         )
     }
@@ -62,5 +109,4 @@ class Transactions extends React.Component {
 
 export default Transactions;
 
-// Next BIG feature-- create something that limits the amount of news info on each side by only like 30 items at a time
-// This will help keep the inital start date for the fetch as the beginning of spring training AND to keep the page fast & dynamic once the season starts
+// Want to implement a feature where the START date for transactions and injuries is only 30-40 days back
