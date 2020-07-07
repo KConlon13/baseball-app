@@ -47,7 +47,7 @@ class Transactions extends React.Component {
                 return <Feed.Event>
                 <Feed.Content>
                 <Feed.Summary>
-                    <Feed.User>{item.note}</Feed.User>
+                    <Feed.User onClick={()=>window.open(`https://www.google.com/search?q=${item.note}`, '_blank')}>{item.note}</Feed.User>
                     <Feed.Date>{finalDate}</Feed.Date>
                     </Feed.Summary>
                 </Feed.Content>
@@ -63,7 +63,7 @@ class Transactions extends React.Component {
                     return <Feed.Event>
                     <Feed.Content>
                     <Feed.Summary>
-                        <Feed.User>{item.note}</Feed.User>
+                        <Feed.User onClick={()=>window.open(`https://www.google.com/search?q=${item.note}`, '_blank')}>{item.note}</Feed.User>
                         <Feed.Date>{finalDate}</Feed.Date>
                         </Feed.Summary>
                     </Feed.Content>
